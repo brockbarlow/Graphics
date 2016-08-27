@@ -17,24 +17,36 @@ int** createIdentity(int rows, int cols)
 		}
 	}
 
-	//double offset = sqrt(rows * cols) - 1;
-
-	/*for (int i = 0; i < rows; i++) {
-		cout << "| ";
-		for (int j = 0; j < cols; j++) {
-			cout << identityMat[i][j] << " | ";
-			if (j == 3) {
-				cout << "\n";
-			}
-		}
-	}*/
-
 	return identityMat;
 }
 
-void performTranslate()
+void performTranslate(int** identityMat)
 {
+	int matA[4] = {5,3,2,1};
+	int translatedMat[4][4];
 
+	////////////////////////////////////////////////////////////////////
+	/*for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++) {
+			for (int x = 0; x < 4; x++) {
+				translatedMat[i][j] = identityMat[i][x] * matA[x];
+			}                                                     
+		}                                                         
+	}
+	                                                              
+	for (int i = 0; i < 4; i++) {
+		cout << *translatedMat[i] << " ";                         
+	}*/
+	////////////////////////////////////////////////////////////////////
+
+	translatedMat[0][0] = identityMat[0][0] * matA[0] + identityMat[0][1] * matA[1] + identityMat[0][2] * matA[2] + identityMat[0][3] * matA[3];
+	translatedMat[1][0] = identityMat[1][0] * matA[0] + identityMat[1][1] * matA[1] + identityMat[1][2] * matA[2] + identityMat[1][3] * matA[3];
+	translatedMat[2][0] = identityMat[2][0] * matA[0] + identityMat[2][1] * matA[1] + identityMat[2][2] * matA[2] + identityMat[2][3] * matA[3];
+	translatedMat[3][0] = identityMat[3][0] * matA[0] + identityMat[3][1] * matA[1] + identityMat[3][2] * matA[2] + identityMat[3][3] * matA[3];
+
+	for (int i = 0; i < 4; i++) {
+		cout << *translatedMat[i] << " ";
+	}
 }
 
 int main()
@@ -43,7 +55,7 @@ int main()
 	int cols = 4;
 
 	int** identityMat = createIdentity(rows, cols);
-	//performTranslate(identityMat);
+	performTranslate(identityMat);
 
 	system("pause");
 	return 0;
