@@ -33,10 +33,10 @@ class SolarApp : public Application
 public:
 	SolarApp();
 	//virtual function overrides.
-	/*virtual*/ bool start() override;
-	/*virtual*/ bool update() override;
-	/*virtual*/ void draw() override;
-	/*virtual*/ void end() override;
+	bool start() override;
+	bool update() override;
+	void draw() override;
+	void end() override;
 
 	GLFWwindow* window;
 	vec4 white, black, yellow, blue;
