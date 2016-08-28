@@ -51,6 +51,13 @@ bool SolarApp::start()
 
 bool SolarApp::update()
 {
+	current = (float)glfwGetTime();
+	delta = current - previous;
+	previous = current;
+	mat4 cameraTransform = glm::inverse(view);
+	cameraTransform = cameraTransform * glm::translate(vec3(0, 0, 10 * delta));
+	view = glm::inverse(cameraTransform);
+
 	while (glfwWindowShouldClose(window) == false && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
