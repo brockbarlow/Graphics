@@ -1,4 +1,5 @@
 #include "App.h"
+#include "Camera.h"
 
 SolarApp::SolarApp()
 {
