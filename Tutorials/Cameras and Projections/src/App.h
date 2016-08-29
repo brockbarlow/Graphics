@@ -6,16 +6,6 @@
 #include <glm.hpp>
 #include <ext.hpp>
 
-using glm::vec3;
-using glm::vec4;
-using glm::mat4;
-using glm::translate;
-using glm::rotate;
-using glm::lookAt;
-using glm::perspective;
-using glm::pi;
-using namespace std;
-
 //app class. holds pure virtual functions
 class Application
 {
@@ -39,11 +29,11 @@ public:
 	void end() override;
 
 	GLFWwindow* window;
-	vec4 white, black, yellow, blue;
-	mat4 view, projection;
-	mat4 sun, earth, moon = mat4(1); //planets
-	vec3 tes = vec3(4, 0, 0);        //Translation of the Earth from the Sun
-	vec3 tme = vec3(2, 0, 0);        //Translation of the Moon from the Earth
+	glm::vec4 white, black, yellow, blue;
+	glm::mat4 view, projection;
+	glm::mat4 sun, earth, moon = glm::mat4(1); //planets
+	glm::vec3 tes = glm::vec3(4, 0, 0);        //Translation of the Earth from the Sun
+	glm::vec3 tme = glm::vec3(2, 0, 0);        //Translation of the Moon from the Earth
 	float angle = 0.0f;              //used with rotate
 	//
 	float previous = 0;
