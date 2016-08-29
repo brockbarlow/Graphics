@@ -7,10 +7,10 @@ SolarApp::SolarApp()
 
 bool SolarApp::start()
 {
-	white = vec4(1);
-	black = vec4(0, 0, 0, 1);
-	yellow = vec4(1, 1, 0, 1);
-	blue = vec4(0, 0, 1, 1);
+	white = glm::vec4(1);
+	black = glm::vec4(0, 0, 0, 1);
+	yellow = glm::vec4(1, 1, 0, 1);
+	blue = glm::vec4(0, 0, 1, 1);
 
 	if (glfwInit() == false)
 	{
@@ -35,8 +35,8 @@ bool SolarApp::start()
 	}
 
 	Gizmos::create();
-	view = lookAt(vec3(8, 8, 8), vec3(0), vec3(0, 1, 0));
-	projection = perspective(pi<float>() * 0.25f, 16 / 9.f, 0.1f, 1000.f);
+	view = glm::lookAt(glm::vec3(8, 8, 8), glm::vec3(0), glm::vec3(0, 1, 0));
+	projection = glm::perspective(glm::pi<float>() * 0.25f, 16 / 9.f, 0.1f, 1000.f);
 
 	auto major = ogl_GetMajorVersion();
 	auto minor = ogl_GetMinorVersion();
@@ -55,16 +55,16 @@ bool SolarApp::update()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		Gizmos::clear();
-		Gizmos::addTransform(mat4(1));
+		Gizmos::addTransform(glm::mat4(1));
 
 		angle += 0.01f;
 
 		//rotates the sun
-		mat4 sunRotation = rotate(angle, vec3(0, 1, 0));
-		sun = mat4(1) * sunRotation;
+		glm::mat4 sunRotation = glm::rotate(angle, glm::vec3(0, 1, 0));
+		sun = glm::mat4(1) * sunRotation;
 
-		mat4 newEarth = translate(tes) * rotate(angle, vec3(0, 1, 0));
-		mat4 newMoon = translate(tme) * rotate(angle, vec3(0, 1, 0));
+		glm::mat4 newEarth = glm::translate(tes) * glm::rotate(angle, glm::vec3(0, 1, 0));
+		glm::mat4 newMoon = glm::translate(tme) * glm::rotate(angle, glm::vec3(0, 1, 0));
 		earth = sun * newEarth;
 		moon = earth * newMoon;
 
@@ -76,15 +76,15 @@ bool SolarApp::update()
 void SolarApp::draw()
 {
 	//draws the sun, earth, and the moon
-	Gizmos::addSphere(vec3(sun[3]), 1, 50, 50, yellow, &sun);
-	Gizmos::addSphere(vec3(earth[3]), 0.6f, 50, 50, blue, &earth);
-	Gizmos::addSphere(vec3(moon[3]), 0.2f, 50, 50, white, &moon);
+	Gizmos::addSphere(glm::vec3(sun[3]), 1, 50, 50, yellow, &sun);
+	Gizmos::addSphere(glm::vec3(earth[3]), 0.6f, 50, 50, blue, &earth);
+	Gizmos::addSphere(glm::vec3(moon[3]), 0.2f, 50, 50, white, &moon);
 
 	//draws grid
 	for (int i = 0; i < 21; ++i)
 	{
-		Gizmos::addLine(vec3(-10 + i, 0, 10), vec3(-10 + i, 0, -10), i == 10 ? white : black);
-		Gizmos::addLine(vec3(10, 0, -10 + i), vec3(-10, 0, -10 + i), i == 10 ? white : black);
+		Gizmos::addLine(glm::vec3(-10 + i, 0, 10), glm::vec3(-10 + i, 0, -10), i == 10 ? white : black);
+		Gizmos::addLine(glm::vec3(10, 0, -10 + i), glm::vec3(-10, 0, -10 + i), i == 10 ? white : black);
 	}
 
 	Gizmos::draw(projection * view);
