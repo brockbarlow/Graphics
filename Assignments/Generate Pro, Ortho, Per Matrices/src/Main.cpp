@@ -19,11 +19,11 @@ void genOrthographic(float r, float l, float t, float b, float n, float f)
 	}
 
 	//calculations formed from aie slides
-	matOrtho[0][0] = 2 / r - l;
+	matOrtho[0][0] = 2 / (r - l);
 	matOrtho[0][3] = -((r + l) / (r - l));
-	matOrtho[1][1] = 2 / t - b;
+	matOrtho[1][1] = 2 / (t - b);
 	matOrtho[1][3] = -((t + b) / (t - b));
-	matOrtho[2][2] = -2 / f - n;
+	matOrtho[2][2] = -2 / (f - n);
 	matOrtho[2][3] = -((f + n) / (f - n));
 	matOrtho[3][3] = 1;
 
@@ -61,7 +61,7 @@ void genPerspective(float fov, float aspect, float n, float f)
 
 	//calculations formed from aie slides
 	matPersp[0][0] = 1 / (aspect * (tan(fov / 2)));
-	matPersp[1][1] = 1 / tan(fov / 2);
+	matPersp[1][1] = 1 / (tan(fov / 2));
 	matPersp[2][2] = -((f + n) / (f - n));
 	matPersp[2][3] = -((2 * f * n) / (f - n));
 	matPersp[3][2] = -1;
@@ -86,9 +86,23 @@ int main()
 	//calls orthographic function
 
 	//             fov        aspect      near   far
-	genPerspective(1.f, (float)1920 / 1080, 5.f, 7.f);
+	genPerspective(1.f, (float)1080 / 720, 1.f, 2.f);
 	//calls perspective function
 
 	system("pause");
 	return 0;
 }
+
+/*
+Output for orthographic:
+1|0|0|-4
+0|0|0|-1
+0|0|-2|-3
+0|0|0|1
+
+Output for perspective:
+1|0|0|0
+0|1|0|0
+0|0|-3|-4
+0|0|-1|0
+*/
