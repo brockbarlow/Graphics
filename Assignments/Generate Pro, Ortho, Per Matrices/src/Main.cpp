@@ -5,6 +5,21 @@ and what are there positions relative to the matrix? Hint: 2/right - left is x*/
 
 #include <iostream>
 
+int** createIdentity(int rows, int cols)
+{
+	int** identityMat;
+	identityMat = new int*[rows];
+
+	for (int i = 0; i < rows; i++) {
+		identityMat[i] = new int[cols];
+		for (int j = 0; j < cols; j++) {
+			identityMat[i][j] = (i == j) ? 1 : 0;
+		}
+	}
+
+	return identityMat;
+}
+
 int genProjection()
 {
 
@@ -25,7 +40,10 @@ int genPerspective()
 
 int main()
 {
+	int rows = 4;
+	int cols = 4;
 
+	int** identityMat = createIdentity(rows, cols);
 
 	system("pause");
 	return 0;
