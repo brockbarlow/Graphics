@@ -20,22 +20,19 @@ int** createIdentity(int rows, int cols)
 	return identityMat;
 }
 
-int genProjection()
+void genProjection()
 {
 
-	return 0;
 }
 
-int genOrthographic()
+void genOrthographic()
 {
 
-	return 0;
 }
 
-int genPerspective()
+void genPerspective()
 {
 
-	return 0;
 }
 
 int main()
