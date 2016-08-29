@@ -5,38 +5,28 @@ and what are there positions relative to the matrix? Hint: 2/right - left is x*/
 
 #include <iostream>
 
-//int** createIdentity(int rows, int cols)
-//{
-//	int** identityMat;
-//	identityMat = new int*[rows];
-//
-//	for (int i = 0; i < rows; i++) {
-//		identityMat[i] = new int[cols];
-//		for (int j = 0; j < cols; j++) {
-//			identityMat[i][j] = (i == j) ? 1 : 0;
-//		}
-//	}
-//
-//	return identityMat;
-//}
-
-void genProjection(int r, int l, int t, int b, int n, int f)
+int genOrthographic(int m, int r, int l, int t, int b, int n, int f)
 {
+	int matOrtho[4][4] = {0};
 
+
+	return matOrtho;
 }
 
-void genOrthographic(int r, int l, int t, int b, int n, int f)
+int genPerspective(int m, int fov, int aspect, int n, int f)
 {
+	int matPersp;
 
-}
 
-void genPerspective(int fov, int aspect, int n, int f)
-{
-
+	return matPersp;
 }
 
 int main()
 {
+	int matA;
+
+	//genOrthographic(matA);
+	//genPerspective(matA);
 
 	system("pause");
 	return 0;
