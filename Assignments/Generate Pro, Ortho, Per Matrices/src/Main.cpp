@@ -20,17 +20,17 @@ and what are there positions relative to the matrix? Hint: 2/right - left is x*/
 //	return identityMat;
 //}
 
-void genProjection()
+void genProjection(int r, int l, int t, int b, int n, int f)
 {
 
 }
 
-void genOrthographic()
+void genOrthographic(int r, int l, int t, int b, int n, int f)
 {
 
 }
 
-void genPerspective()
+void genPerspective(int fov, int aspect, int n, int f)
 {
 
 }
