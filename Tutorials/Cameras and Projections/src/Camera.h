@@ -16,20 +16,22 @@ public:
 	glm::mat4 getView();
 	glm::mat4 getProjection();
 	glm::mat4 getProjectionView();
-private:
 	void updateProjectionViewTransform();
 	glm::mat4 viewTransform;
 	glm::mat4 worldTransform;
+private:
 	glm::mat4 projectionTransform;
 	glm::mat4 projectionViewTransform;
 };
 
 class FlyCamera : public Camera {
 public:
+	FlyCamera();
 	void update(float deltaTime) override;
 	void setSpeed(float speed);
 private:
-	glm::vec3 up;
-	glm::mat4 translateCam, scaleCam, rotateCam = glm::mat4(1);
+	GLFWwindow* window;
+	glm::vec3 up = glm::vec3(0, 1, 0);
+	float angle = 0.0f;
 	float speed;
 };

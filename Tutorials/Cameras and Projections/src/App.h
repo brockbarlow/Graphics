@@ -34,5 +34,5 @@ private:
 	glm::mat4 sun, earth, moon = glm::mat4(1); //planets
 	glm::vec3 tes = glm::vec3(4, 0, 0);        //Translation of the Earth from the Sun
 	glm::vec3 tme = glm::vec3(2, 0, 0);        //Translation of the Moon from the Earth
-	float angle = 0.0f;              //used with rotate
+	float angle = 0.0f;                        //used with rotate
 };
