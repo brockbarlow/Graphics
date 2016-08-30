@@ -6,7 +6,7 @@ SolarApp::SolarApp()
 
 }
 
-bool SolarApp::start()//
+bool SolarApp::start()
 {
 	white = glm::vec4(1);
 	black = glm::vec4(0, 0, 0, 1);
@@ -49,12 +49,8 @@ bool SolarApp::start()//
 	return true;
 }
 
-bool SolarApp::update()//
-{
-	current = (float)glfwGetTime();
-	delta = current - previous;
-	previous = current;
-	
+bool SolarApp::update()
+{	
 	while (glfwWindowShouldClose(window) == false && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -78,7 +74,7 @@ bool SolarApp::update()//
 	return false;
 }
 
-void SolarApp::draw()//
+void SolarApp::draw()
 {
 	//draws the sun, earth, and the moon
 	Gizmos::addSphere(glm::vec3(sun[3]), 1, 50, 50, yellow, &sun);

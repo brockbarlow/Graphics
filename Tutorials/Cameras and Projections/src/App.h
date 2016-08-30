@@ -20,7 +20,7 @@ public:
 //solar system class. everything is public. inherits from app class.
 class SolarApp : public Application
 {
-public://
+public:
 	SolarApp();
 	//virtual function overrides.
 	bool start() override;
@@ -35,8 +35,4 @@ private:
 	glm::vec3 tes = glm::vec3(4, 0, 0);        //Translation of the Earth from the Sun
 	glm::vec3 tme = glm::vec3(2, 0, 0);        //Translation of the Moon from the Earth
 	float angle = 0.0f;              //used with rotate
-	
-	float previous = 0;
-	float current;
-	float delta;
 };
