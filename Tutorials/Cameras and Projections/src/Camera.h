@@ -26,6 +26,7 @@ private:
 
 class FlyCamera : public Camera {
 public:
+	FlyCamera();
 	void update(float deltaTime) override;
 	void setSpeed(float speed);
 private:

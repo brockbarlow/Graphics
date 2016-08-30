@@ -6,7 +6,7 @@ SolarApp::SolarApp()
 
 }
 
-bool SolarApp::start()
+bool SolarApp::start()//
 {
 	white = glm::vec4(1);
 	black = glm::vec4(0, 0, 0, 1);
@@ -19,8 +19,6 @@ bool SolarApp::start()
 	}
 
 	window = glfwCreateWindow(1280, 720, "Computer Graphics", nullptr, nullptr);
-	//
-	/*myCamera = new FlyCamera;*/
 
 	if (window == nullptr)
 	{
@@ -51,15 +49,12 @@ bool SolarApp::start()
 	return true;
 }
 
-bool SolarApp::update()
+bool SolarApp::update()//
 {
 	current = (float)glfwGetTime();
 	delta = current - previous;
 	previous = current;
-	glm::mat4 cameraTransform = glm::inverse(view);
-	cameraTransform = cameraTransform * glm::translate(glm::vec3(0, 0, 10 * delta));
-	view = glm::inverse(cameraTransform);
-	//
+	
 	while (glfwWindowShouldClose(window) == false && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -78,16 +73,12 @@ bool SolarApp::update()
 		earth = sun * newEarth;
 		moon = earth * newMoon;
 
-		//
-		/*myCamera->update(deltaTime);
-		Gizmos::draw(myCamera->getProjectionView());*/
-
 		return true;
 	}
 	return false;
 }
 
-void SolarApp::draw()
+void SolarApp::draw()//
 {
 	//draws the sun, earth, and the moon
 	Gizmos::addSphere(glm::vec3(sun[3]), 1, 50, 50, yellow, &sun);

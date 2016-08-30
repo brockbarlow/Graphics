@@ -40,6 +40,13 @@ void Camera::updateProjectionViewTransform()
 	projectionViewTransform = projectionTransform * viewTransform;
 }
 
+FlyCamera::FlyCamera()
+{
+	up = glm::vec3(0, 1, 0);
+	setPerspective(glm::pi<float>() * 0.25f, 16 / 9.f, 0.1f, 1000.f);
+	setLookAt(glm::vec3(8, 8, 8), glm::vec3(0), up);
+}
+
 void FlyCamera::update(float deltaTime)
 {
 
