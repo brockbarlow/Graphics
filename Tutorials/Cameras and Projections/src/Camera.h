@@ -30,8 +30,8 @@ public:
 	void update(float deltaTime) override;
 	void setSpeed(float speed);
 private:
-	GLFWwindow* window;
+	GLFWwindow* window;                //needed for get mouse button and get key if statements
 	glm::vec3 up = glm::vec3(0, 1, 0);
-	float angle = 0.0f;
+	float angle = 0.0f;  //used with rotation
 	float speed;
 };
