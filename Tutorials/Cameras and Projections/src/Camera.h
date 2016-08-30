@@ -8,7 +8,7 @@
 
 class Camera {
 public:
-	virtual void update(float deltaTime, GLFWwindow* window) = 0;
+	virtual void update(float deltaTime) = 0;
 	void setPerspective(float  fieldOfView, float aspectRatio, float near, float far);
 	void setLookAt(glm::vec3 from, glm::vec3 to, glm::vec3 up);
 	void setPosition(glm::vec3 position);
@@ -26,7 +26,7 @@ private:
 
 class FlyCamera : public Camera {
 public:
-	void update(float deltaTime, GLFWwindow* window) override;
+	void update(float deltaTime) override;
 	void setSpeed(float speed);
 private:
 	glm::vec3 up;

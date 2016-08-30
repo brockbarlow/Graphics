@@ -40,7 +40,7 @@ void Camera::updateProjectionViewTransform()
 	
 }
 
-void FlyCamera::update(float deltaTime, GLFWwindow* window)
+void FlyCamera::update(float deltaTime)
 {
 
 }
