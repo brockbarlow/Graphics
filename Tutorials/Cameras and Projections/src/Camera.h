@@ -32,6 +32,7 @@ public:
 private:
 	GLFWwindow* window;                //needed for get mouse button and get key if statements
 	glm::vec3 up = glm::vec3(0, 1, 0);
+	glm::mat4 translationCamera, rotationCamera, scaleCamera = glm::mat4(1);
 	float angle = 0.0f;  //used with rotation
 	float speed;
 };
