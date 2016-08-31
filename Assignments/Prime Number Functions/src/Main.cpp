@@ -11,6 +11,26 @@ below 1000.
 
 #include <iostream>
 
+void calculatePrime()
+{
+
+}
+
+void findUnder100()
+{
+
+}
+
+void determineMultiple()
+{
+
+}
+
+void findUnder1000()
+{
+
+}
+
 int main()
 {
 
