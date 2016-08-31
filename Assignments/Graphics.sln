@@ -17,6 +17,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Generate Pro, Ortho, Per Ma
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Array Argument", "Array Argument\Array Argument.vcxproj", "{7567106D-B56A-4599-BE2F-0E0F8A523ECF}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Prime Number Functions", "Prime Number Functions\Prime Number Functions.vcxproj", "{65C100D7-ED3A-4B17-8B2A-5074E9B793BF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -81,6 +83,14 @@ Global
 		{7567106D-B56A-4599-BE2F-0E0F8A523ECF}.Release|x64.Build.0 = Release|x64
 		{7567106D-B56A-4599-BE2F-0E0F8A523ECF}.Release|x86.ActiveCfg = Release|Win32
 		{7567106D-B56A-4599-BE2F-0E0F8A523ECF}.Release|x86.Build.0 = Release|Win32
+		{65C100D7-ED3A-4B17-8B2A-5074E9B793BF}.Debug|x64.ActiveCfg = Debug|x64
+		{65C100D7-ED3A-4B17-8B2A-5074E9B793BF}.Debug|x64.Build.0 = Debug|x64
+		{65C100D7-ED3A-4B17-8B2A-5074E9B793BF}.Debug|x86.ActiveCfg = Debug|Win32
+		{65C100D7-ED3A-4B17-8B2A-5074E9B793BF}.Debug|x86.Build.0 = Debug|Win32
+		{65C100D7-ED3A-4B17-8B2A-5074E9B793BF}.Release|x64.ActiveCfg = Release|x64
+		{65C100D7-ED3A-4B17-8B2A-5074E9B793BF}.Release|x64.Build.0 = Release|x64
+		{65C100D7-ED3A-4B17-8B2A-5074E9B793BF}.Release|x86.ActiveCfg = Release|Win32
+		{65C100D7-ED3A-4B17-8B2A-5074E9B793BF}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
