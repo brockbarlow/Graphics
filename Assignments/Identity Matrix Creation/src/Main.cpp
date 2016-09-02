@@ -2,10 +2,10 @@
 
 void createIdentity(int, int);
 
+int rows, cols;
+
 int main()
 {
-	int rows, cols;
-
 	std::cout << "Enter rows and columns" << "\n" << std::endl;
 	
 	std::cout << "Rows: ";
