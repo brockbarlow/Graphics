@@ -1,56 +1,48 @@
-/*Create a function to calculate a prime number (Show on 
-paper or in comments what you think a prime number is. Do 
-not google it...). 
-
-Write a function that uses that function to find all prime 
-numbers under 100.
-
-Write a function that determines if a number is a multiple 
-of another number. 
-
-Use your functions together to find all prime numbers below 
-1000.
-*/
+/*A prime number is a number greater than one that has no positive divisors
+other than one and itself.*/
 
 #include <iostream>
 
-int isPrime(const int num)
-{
-	for (int i = 2; i < num; i++)
-	{
-		if (num % i == 0)
-		{
-			return false;
-		}
-	}
-	return num;
-}
+bool isPrime(const int &);
+bool isMultiple(int);
 
-void isMultiple()
-{
-
-}
-
-void calculate()
-{
-	const int under100 = 100;
-	const int under1000 = 1000;
-	int temp;
-
-	for (int i = 2; i < under100; i++)
-	{
-		temp = isPrime(i);
-		std::cout << temp << std::endl;
-	}
-}
+const int under100 = 100;
+const int under1000 = 1000;
 
 int main()
 {
-	calculate();
+	for (int i = 0; i < under100; i++) {
+		if (isPrime(i)) {
+			std::cout << i << " is prime." << std::endl;
+		}
+	}
+
+	std::cout << std::endl;
+
+	for (int i = 0; i < under1000; i++) {
+		if (isPrime(i)) {
+			std::cout << i << " is prime." << std::endl;
+		}
+	}
 
 	system("pause");
 	return 0;
 }
 
-/*A prime number is a number greater than one that has
-no positive divisors other than one and itself.*/
+bool isPrime(const int &num)
+{
+	if (isMultiple(num)) {
+		return false;
+	}
+	return true;
+}
+
+bool isMultiple(int prime)
+{
+	for (int i = 2; i < prime; i++) {
+		if (prime % i == 0) {
+			return true;
+		}
+	}
+	return false;
+}
