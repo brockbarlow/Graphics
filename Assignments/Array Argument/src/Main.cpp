@@ -1,34 +1,56 @@
-/*Write a function that takes another function as an argument.
-Store this argument in an array.
-Then execute every function in the array.
-This is gist 5*/
-
 #include <iostream>
 
-void ArgumentOne()
+void argumentOne();
+void argumentTwo();  //prototypes
+void argumentThree();
+
+void storeFunctions(void(*function)(), void(*array[3])())
 {
-	std::cout << "argument function one" << std::endl;
-	std::cout << std::endl;
+	for (int i = 0; i < 3; i++) {
+		if (array[i] == 0) {          //adds functions into array
+			array[i] = function;
+			break;
+		}
+	}
 }
 
-void ArgumentTwo()
-{
-	int num1, num2, answer;
-
-	answer = num1 + num2;
-
-	std::cout << answer << std::endl;
-	std::cout << std::endl;
-}
+void(*container[3])() = { 0,0,0 }; //void variable array of size three
 
 int main()
 {
+	storeFunctions(argumentOne, container);
+	storeFunctions(argumentTwo, container);   //call container function to add functions to the array
+	storeFunctions(argumentThree, container);
+
+	for (int i = 0; i < 3; i++) { //perform functions in array
+		(*container[i])();
+	}
 
 	system("pause");
 	return 0;
 }
 
-/*could not finish assignment. had code block after making 
-functions. block began when I needed to "takes another 
-function as an argument. tried looking on google for help.
-became more confused.*/
+void argumentOne()
+{
+	int numOne = 1;
+	int numTwo = 2;  //add function
+	int answer = 0;
+
+	answer = numOne + numTwo;
+	std::cout << answer << std::endl;
+}
+
+void argumentTwo()
+{
+	float numOne = 1.5f;
+	float numTwo = 6.3f;  //mulitply function
+	float answer = 0.0f;
+
+	answer = numOne * numTwo;
+	std::cout << answer << std::endl;
+}
+
+void argumentThree()  //print something function
+{
+	std::cout << "Functions, functions everywhere..." << std::endl;
+}
