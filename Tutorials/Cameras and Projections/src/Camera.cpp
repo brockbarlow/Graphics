@@ -12,7 +12,7 @@ void Camera::setLookAt(glm::vec3 from, glm::vec3 to, glm::vec3 up)
 
 void Camera::setPosition(glm::vec3 position)
 {
-	
+	worldTransform = worldTransform * glm::translate(position);
 }
 
 glm::mat4 Camera::getWorldTransform()
@@ -42,11 +42,8 @@ void Camera::updateProjectionViewTransform()
 
 FlyCamera::FlyCamera()
 {
-	up = glm::vec3(0,1,0);
 	setLookAt(glm::vec3(8, 8, 8), glm::vec3(0), up);
 	setPerspective(glm::pi<float>() * 0.35f, 16 / 9.f, 0.1f, 1000.f);
-	oldX, oldY = 0;
-	mousePress = true;
 }
 
 void FlyCamera::update(float deltaTime)
@@ -57,8 +54,6 @@ void FlyCamera::update(float deltaTime)
 
 	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT))
 	{
-		double posX, posY = 0;
-		float angle = 0.0f;
 		glfwGetCursorPos(window, &posX, &posY);
 
 		if (mousePress)
@@ -68,24 +63,24 @@ void FlyCamera::update(float deltaTime)
 			mousePress = false;
 		}
 
-		float newX = oldX - posX;
-		float newY = oldY - posY;
+		float offsetX = oldX - posX;
+		float offsetY = oldY - posY;
 
-		newX *= 0.005f;
-		newY *= 0.005f;
+		offsetX *= 0.005f;
+		offsetY *= 0.005f;
 
-		if (newX < 1 || newX > 1)
+		if (offsetX < 1 || offsetX > 1)
 		{
-			angle = newX;
+			angle = offsetX;
 			rotationCamera[0][0] = cos(angle);
 			rotationCamera[0][2] = sin(angle);
 			rotationCamera[2][0] = -1.f * sin(angle);
 			rotationCamera[2][2] = cos(angle);
 		}
 
-		if (newY < 1 || newY > 1)
+		if (offsetY < 1 || offsetY > 1)
 		{
-			angle = newY;
+			angle = offsetY;
 			rotationCamera[1][1] = cos(angle);
 			rotationCamera[1][2] = -1.f * sin(angle);
 			rotationCamera[2][1] = sin(angle);
@@ -123,5 +118,5 @@ void FlyCamera::update(float deltaTime)
 
 void FlyCamera::setSpeed(float speed)
 {
-	
+	this->speed = speed;
 }

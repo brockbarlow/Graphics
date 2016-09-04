@@ -30,8 +30,10 @@ public:
 	void update(float deltaTime) override;
 	void setSpeed(float speed);
 private:
-	glm::vec3 up;
+	glm::vec3 up = glm::vec3(0, 1, 0);
 	float speed;
-	double oldX, oldY;
-	bool mousePress;
+	double oldX, oldY = 0;
+	double posX, posY = 0;
+	float angle = 0.0f;
+	bool mousePress = true;
 };
