@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Intro to OpenGL", "Intro to
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Cameras and Projections", "Cameras and Projections\Cameras and Projections.vcxproj", "{9FE63F59-C76F-422B-86C3-C6487189C22F}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Rendering Geometry", "Rendering Geometry\Rendering Geometry.vcxproj", "{3FA0AB72-B614-4EBD-A585-DC0D1BF2B83D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{9FE63F59-C76F-422B-86C3-C6487189C22F}.Release|x64.Build.0 = Release|x64
 		{9FE63F59-C76F-422B-86C3-C6487189C22F}.Release|x86.ActiveCfg = Release|Win32
 		{9FE63F59-C76F-422B-86C3-C6487189C22F}.Release|x86.Build.0 = Release|Win32
+		{3FA0AB72-B614-4EBD-A585-DC0D1BF2B83D}.Debug|x64.ActiveCfg = Debug|x64
+		{3FA0AB72-B614-4EBD-A585-DC0D1BF2B83D}.Debug|x64.Build.0 = Debug|x64
+		{3FA0AB72-B614-4EBD-A585-DC0D1BF2B83D}.Debug|x86.ActiveCfg = Debug|Win32
+		{3FA0AB72-B614-4EBD-A585-DC0D1BF2B83D}.Debug|x86.Build.0 = Debug|Win32
+		{3FA0AB72-B614-4EBD-A585-DC0D1BF2B83D}.Release|x64.ActiveCfg = Release|x64
+		{3FA0AB72-B614-4EBD-A585-DC0D1BF2B83D}.Release|x64.Build.0 = Release|x64
+		{3FA0AB72-B614-4EBD-A585-DC0D1BF2B83D}.Release|x86.ActiveCfg = Release|Win32
+		{3FA0AB72-B614-4EBD-A585-DC0D1BF2B83D}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
