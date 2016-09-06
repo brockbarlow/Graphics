@@ -16,6 +16,7 @@ public:
 	bool update() override;
 	void draw() override;
 	void destroy() override;
+	void generateGrid(unsigned int rows, unsigned int cols);
 private:
 	GLFWwindow* window;
 	unsigned int m_programID;
