@@ -9,6 +9,10 @@ fails give feedback to the user.*/
 
 int calculate(int max, int min)
 {
+	int ran;
+	std::cout << "enter random.";
+	std::cin >> ran;
+
 
 }
 
@@ -19,7 +23,15 @@ void takeParameter(int(*function)())
 
 int main()
 {
+	int max, min;
 
+	std::cout << "enter max.";
+	std::cin >> max;
+	std::cout << "enter min.";
+	std::cin >> min;
+
+	calculate(max, min);
+	takeParameter(calculate);
 
 	system("pause");
 	return 0;
