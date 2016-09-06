@@ -7,7 +7,15 @@ fails give feedback to the user.*/
 
 #include <iostream>
 
+int calculate(int max, int min)
+{
 
+}
+
+void takeParameter(int(*function)())
+{
+
+}
 
 int main()
 {
