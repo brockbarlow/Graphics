@@ -19,6 +19,8 @@ int calculate(int max, int min)
 
 	max = 2, min = 1
 	program will freak out and ask to abort.
+
+	...I don't understand.
 	*/
 
 	//my calculation for random number.
