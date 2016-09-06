@@ -11,12 +11,26 @@ fails give feedback to the user.*/
 int calculate(int max, int min)
 {
 	assert(min >= max && "Error! Min is greater!");
+	std::cout << "Passed test check... \n";
+
+	/*Test case for assert:
+	max = 1, min = 2
+	code will pass.
+
+	max = 2, min = 1
+	program will freak out and ask to abort.
+	*/
+
+	//my calculation for random number.
+	int ranNum = 0;
+	ranNum = max / min;
+	return ranNum;
 }
 
-void takeParameter(int(*function)())
-{
-
-}
+//void takeParameter(int(*function)(int max, int min))
+//{
+//
+//}
 
 int main()
 {
@@ -28,7 +42,7 @@ int main()
 	std::cin >> min;
 
 	calculate(max, min);
-	takeParameter(calculate);
+	//takeParameter(calculate);
 
 	system("pause");
 	return 0;
@@ -38,10 +52,13 @@ int main()
 Things that I understood about assignment:
 1) create functions.
 2) have functions take arguments.
-3) pass a function to another function as a parameter.
 
 Problems with assignment:
-
-1) Never used assert before.
-2) Don't understand how calculation needs to be performed.
+1) Had trouble passing a function to another function as
+   a parameter.
+2) Never used assert before (refer to test case in function).
+3) Didn't understand how calculation needed to be performed
+   for calculate function.
+4) Didn't understand how to perform fail check for the
+   function taking a function parameter.
 */
