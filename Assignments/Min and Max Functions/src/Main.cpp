@@ -33,3 +33,15 @@ int main()
 	system("pause");
 	return 0;
 }
+
+/*
+Things that I understood about assignment:
+1) create functions.
+2) have functions take arguments.
+3) pass a function to another function as a parameter.
+
+Problems with assignment:
+
+1) Never used assert before.
+2) Don't understand how calculation needs to be performed.
+*/
