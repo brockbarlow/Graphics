@@ -2,7 +2,7 @@
 
 RenderingGeometry::RenderingGeometry()
 {
-
+	
 }
 
 void RenderingGeometry::generateGrid(unsigned int rows, unsigned int cols)
@@ -103,7 +103,12 @@ bool RenderingGeometry::start()
 
 bool RenderingGeometry::update()
 {
-
+	while (glfwWindowShouldClose(window) == false && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
+	{
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		return true;
+	}
+	return false;
 }
 
 void RenderingGeometry::draw()
