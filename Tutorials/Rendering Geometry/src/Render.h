@@ -16,6 +16,7 @@ public:
 	void draw() override;
 	void destroy() override;
 	void generateGrid(unsigned int rows, unsigned int cols);
+	void generatePlane();
 private:
 	GLFWwindow* window;
 	unsigned int m_programID;
