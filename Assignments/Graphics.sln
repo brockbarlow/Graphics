@@ -21,6 +21,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Prime Number Functions", "P
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Min and Max Functions", "Min and Max Functions\Min and Max Functions.vcxproj", "{1AA94462-C072-4F49-9AED-4BCA03CB1824}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Character Array Length", "Character Array Length\Character Array Length.vcxproj", "{49455E91-5560-4E27-B368-447348C0D5B0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -101,6 +103,14 @@ Global
 		{1AA94462-C072-4F49-9AED-4BCA03CB1824}.Release|x64.Build.0 = Release|x64
 		{1AA94462-C072-4F49-9AED-4BCA03CB1824}.Release|x86.ActiveCfg = Release|Win32
 		{1AA94462-C072-4F49-9AED-4BCA03CB1824}.Release|x86.Build.0 = Release|Win32
+		{49455E91-5560-4E27-B368-447348C0D5B0}.Debug|x64.ActiveCfg = Debug|x64
+		{49455E91-5560-4E27-B368-447348C0D5B0}.Debug|x64.Build.0 = Debug|x64
+		{49455E91-5560-4E27-B368-447348C0D5B0}.Debug|x86.ActiveCfg = Debug|Win32
+		{49455E91-5560-4E27-B368-447348C0D5B0}.Debug|x86.Build.0 = Debug|Win32
+		{49455E91-5560-4E27-B368-447348C0D5B0}.Release|x64.ActiveCfg = Release|x64
+		{49455E91-5560-4E27-B368-447348C0D5B0}.Release|x64.Build.0 = Release|x64
+		{49455E91-5560-4E27-B368-447348C0D5B0}.Release|x86.ActiveCfg = Release|Win32
+		{49455E91-5560-4E27-B368-447348C0D5B0}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
