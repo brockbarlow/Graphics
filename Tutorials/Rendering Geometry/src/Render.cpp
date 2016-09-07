@@ -48,7 +48,7 @@ void RenderingGeometry::generateGrid(unsigned int rows, unsigned int cols)
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, (rows - 1) * (cols - 1) * 6 * sizeof(unsigned int), auiIndices, GL_STATIC_DRAW);
 
-	glBindVertexArray(0);
+	glBindVertexArray(0); //unbind the vao
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
