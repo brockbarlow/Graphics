@@ -1,74 +1,98 @@
 #include "Render.h"
-
+using glm::vec4;
 RenderingGeometry::RenderingGeometry()
 {
 	
 }
-
-void RenderingGeometry::generateGrid(unsigned int rows, unsigned int cols)
+ 
+bool RenderingGeometry::start()
 {
-	Vertex* aoVertices = new Vertex[rows * cols];
-	for (unsigned int r = 0; r < rows; r++)
+	if (glfwInit() == false)
 	{
-		for (unsigned int c = 0; c < cols; c++)
-		{
-			aoVertices[r * cols + c].position = glm::vec4((float)c, 0, (float)r, 1);
-			glm::vec3 color = glm::vec3(sinf((c / (float)(cols - 1)) * (r / (float)(rows - 1))));
-			aoVertices[r * cols + c].color = glm::vec4(color, 1);
-		}
+		return false;
 	}
 
-	unsigned int* auiIndices = new unsigned int[(rows - 1) * (cols - 1) * 6];
-	unsigned int index = 0;
-	for (unsigned int r = 0; r < (rows - 1); r++)
+	window = glfwCreateWindow(1280, 720, "Computer Graphics", nullptr, nullptr);
+
+	if (window == nullptr)
 	{
-		for (unsigned int c = 0; c < (cols - 1); c++)
-		{   //triangle 1
-			auiIndices[index++] = r * cols + c;
-			auiIndices[index++] = (r + 1) * cols + c;
-			auiIndices[index++] = (r + 1) * cols + (c + 1);
-			//triangle 2
-			auiIndices[index++] = r * cols + c;
-			auiIndices[index++] = (r + 1) * cols + (c + 1);
-			auiIndices[index++] = r * cols + (c + 1);
-		}
+		glfwTerminate();
+		return false;
 	}
 
+	glfwMakeContextCurrent(window);
+
+	if (ogl_LoadFunctions() == ogl_LOAD_FAILED)
+	{
+		glfwDestroyWindow(window);
+		glfwTerminate();
+		return false;
+	}
+
+	
+	view = glm::lookAt(glm::vec3(8, 8, 8), glm::vec3(0), glm::vec3(0, 1, 0));
+	projection = glm::perspective(glm::pi<float>() * 0.25f, 16 / 9.f, 0.1f, 1000.f);
+
+	auto major = ogl_GetMajorVersion();
+	auto minor = ogl_GetMinorVersion();
+	printf("GL: %i.%i\n", major, minor);
+
+	glClearColor(0.25f, 0.25f, 0.25f, 1);
+	glEnable(GL_DEPTH_TEST); //enables the depth buffer
+	// create vertex and index data for a quad
+	Vertex vertices[4];
+	unsigned int indices[6] = { 2, 1, 0, 2, 3, 1 };
+
+	vertices[0].position = vec4(-5, 0, -5, 1);
+	vertices[1].position = vec4(5, 0, -5, 1);
+	vertices[2].position = vec4(-5, 0, 5, 1);
+	vertices[3].position = vec4(5, 0, 5, 1);
+
+	vertices[0].color = vec4(1, 0, 0, 1);
+	vertices[1].color = vec4(0, 1, 0, 1);
+	vertices[2].color = vec4(0, 0, 1, 1);
+	vertices[3].color = vec4(1, 1, 1, 1);
+	//generate the vertex buffer
 	glGenBuffers(1, &m_VBO);
+	//generate the index buffer
 	glGenBuffers(1, &m_IBO);
+	//generate the vertex descriptor
 	glGenVertexArrays(1, &m_VAO);
+	//bind the vertex descriptor
 	glBindVertexArray(m_VAO);
 
 	glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-	glBufferData(GL_ARRAY_BUFFER, (rows * cols) * sizeof(Vertex), aoVertices, GL_STATIC_DRAW);
-	glEnableVertexAttribArray(0);
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
-	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(sizeof(glm::vec4)));
+	glBufferData(GL_ARRAY_BUFFER, 4 * sizeof(Vertex), vertices, GL_STATIC_DRAW);
+
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, (rows - 1) * (cols - 1) * 6 * sizeof(unsigned int), auiIndices, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), indices, GL_STATIC_DRAW);
+
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
+
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(sizeof(glm::vec4)));
+
+
+
 
 	glBindVertexArray(0); //unbind the vao
-
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-	delete[] aoVertices;
-}
-
-bool RenderingGeometry::start()
-{
+		// create shader
 	const char* vsSource = "#version 410\n \
-                            layout(location=0) in vec4 position; \
-                            layout(location=1) in vec4 color; \
-                            out vec4 vColor; \
-                            uniform mat4 projectionViewWorldMatrix; \
-                            void main() {vColor = color; gl_Position = projectionViewWorldMatrix * position; }";
+							layout(location=0) in vec4 Position; \
+							layout(location=1) in vec4 Colour; \
+							out vec4 vColour; \
+							uniform mat4 ProjectionViewWorld; \
+							void main() { vColour = Colour; \
+							gl_Position = ProjectionViewWorld * Position; }";
 
 	const char* fsSource = "#version 410\n \
-                            in vec4 vColor; \
-                            out vec4 fragColor; \
-                            void main() {fragColor = vColor; }";
+							in vec4 vColour; \
+							out vec4 FragColor; \
+							void main() { FragColor = vColour; }";
 
 	int success = GL_FALSE;
 	unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
@@ -99,6 +123,8 @@ bool RenderingGeometry::start()
 
 	glDeleteShader(fragmentShader);
 	glDeleteShader(vertexShader);
+	
+	return true;
 }
 
 bool RenderingGeometry::update()
@@ -113,6 +139,16 @@ bool RenderingGeometry::update()
 
 void RenderingGeometry::draw()
 {
+	// clear the screen for this frame
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glUseProgram(m_programID);
+	unsigned int projectionViewUniform = glGetUniformLocation(m_programID, "projectionViewWorldMatrix");
+
+	m_projectionViewMatrix = projection * view;
+	glUniformMatrix4fv(projectionViewUniform, 1, false,	glm::value_ptr(m_projectionViewMatrix));
+	glBindVertexArray(m_VAO);
+	unsigned int indexCount =6;
+	glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0);
 	glfwSwapBuffers(window);
 	glfwPollEvents();
 }

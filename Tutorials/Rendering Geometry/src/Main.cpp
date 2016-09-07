@@ -2,6 +2,9 @@
 
 int main()
 {
+	//printf("size of Vertex is: %i\n", sizeof(Vertex));
+	//system("pause");
+	
 	Application* application = new RenderingGeometry();
 
 	if (application->start() == true)
@@ -13,6 +16,6 @@ int main()
 		application->destroy();
 	}
 	delete application;
-
+	
 	return 0;
 }

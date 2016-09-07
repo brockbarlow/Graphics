@@ -3,8 +3,9 @@
 
 struct Vertex
 {
-	glm::vec4 position;
+	
 	glm::vec4 color;
+	glm::vec4 position;
 };
 
 class RenderingGeometry : public Application {
@@ -15,14 +16,19 @@ public:
 	bool update() override;
 	void draw() override;
 	void destroy() override;
-	void generateGrid(unsigned int rows, unsigned int cols);
-	void generatePlane();
+	//void generateGrid(unsigned int rows, unsigned int cols);
+	//void generatePlane();
 private:
+	glm::mat4 m_projectionViewMatrix;
+	glm::mat4 view;
+	glm::mat4 projection;
 	GLFWwindow* window;
 	unsigned int m_programID;
 	unsigned int m_VAO;
 	unsigned int m_VBO;
 	unsigned int m_IBO;
+	int rows;
+	int cols;
 };
 
 /*Vertex vertices[4];
