@@ -8,7 +8,8 @@ RenderingGeometry::RenderingGeometry()
 void RenderingGeometry::generatePlane()
 {
 	Vertex vertices[4];
-	unsigned int indices[4] = { 0,1,2,3 };
+	//unsigned int indices[4] = { 0,1,2,3 };
+	unsigned int indices[6] = { 2, 1, 0, 2, 3, 1 };
 
 	vertices[0].position = glm::vec4(-5, 0, -5, 1);
 	vertices[1].position = glm::vec4(5, 0, -5, 1);
@@ -56,18 +57,7 @@ bool RenderingGeometry::start()
 	glClearColor(0.25f, 0.25f, 0.25f, 1);
 	glEnable(GL_DEPTH_TEST); //enables the depth buffer
 	// create vertex and index data for a quad
-	Vertex vertices[4];
-	unsigned int indices[6] = { 2, 1, 0, 2, 3, 1 };
-
-	vertices[0].position = vec4(-5, 0, -5, 1);
-	vertices[1].position = vec4(5, 0, -5, 1);
-	vertices[2].position = vec4(-5, 0, 5, 1);
-	vertices[3].position = vec4(5, 0, 5, 1);
-
-	vertices[0].color = vec4(1, 0, 0, 1);
-	vertices[1].color = vec4(0, 1, 0, 1);
-	vertices[2].color = vec4(0, 0, 1, 1);
-	vertices[3].color = vec4(1, 1, 1, 1);
+	
 	//generate the vertex buffer
 	glGenBuffers(1, &m_VBO);
 	//generate the index buffer
