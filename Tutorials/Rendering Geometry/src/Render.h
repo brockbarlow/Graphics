@@ -15,7 +15,6 @@ public:
 	bool update() override;
 	void draw() override;
 	void destroy() override;
-	//void generateGrid(unsigned int rows, unsigned int cols);
 	//void generatePlane();
 private:
 	glm::mat4 m_projectionViewMatrix;
