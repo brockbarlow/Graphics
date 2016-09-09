@@ -16,6 +16,8 @@ public:
 	void draw() override;
 	void destroy() override;
 	void generatePlane();
+	void generateCube();
+	void generateSphere();
 private:
 	glm::mat4 m_projectionViewMatrix;
 	glm::mat4 view;
