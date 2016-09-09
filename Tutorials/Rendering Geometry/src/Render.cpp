@@ -2,7 +2,31 @@
 
 RenderingGeometry::RenderingGeometry()
 {
-	
+	glfwInit();
+
+	window = glfwCreateWindow(1280, 720, "Computer Graphics", nullptr, nullptr);
+
+	if (window == nullptr)
+	{
+		glfwTerminate();
+		//return false;
+	}
+
+	glfwMakeContextCurrent(window);
+
+	if (ogl_LoadFunctions() == ogl_LOAD_FAILED)
+	{
+		glfwDestroyWindow(window);
+		glfwTerminate();
+		//return false;
+	}
+
+	view = glm::lookAt(glm::vec3(8, 8, 8), glm::vec3(0), glm::vec3(0, 1, 0));
+	projection = glm::perspective(glm::pi<float>() * 0.25f, 16 / 9.f, 0.1f, 1000.f);
+
+	//Gizmos::create();
+	glClearColor(0.25f, 0.25f, 0.25f, 1);
+	glEnable(GL_DEPTH_TEST);
 }
  
 void RenderingGeometry::generatePlane()
@@ -52,35 +76,6 @@ void RenderingGeometry::generateSphere()
 
 bool RenderingGeometry::start()
 {
-	if (glfwInit() == false)
-	{
-		return false;
-	}
-
-	window = glfwCreateWindow(1280, 720, "Computer Graphics", nullptr, nullptr);
-
-	if (window == nullptr)
-	{
-		glfwTerminate();
-		return false;
-	}
-
-	glfwMakeContextCurrent(window);
-
-	if (ogl_LoadFunctions() == ogl_LOAD_FAILED)
-	{
-		glfwDestroyWindow(window);
-		glfwTerminate();
-		return false;
-	}
-	
-	view = glm::lookAt(glm::vec3(8, 8, 8), glm::vec3(0), glm::vec3(0, 1, 0));
-	projection = glm::perspective(glm::pi<float>() * 0.25f, 16 / 9.f, 0.1f, 1000.f);
-
-	Gizmos::create();
-	glClearColor(0.25f, 0.25f, 0.25f, 1);
-	glEnable(GL_DEPTH_TEST); 
-
 	generatePlane(); //generate the plane
 
 	const char* vsSource = "#version 410\n \
@@ -132,7 +127,7 @@ bool RenderingGeometry::update()
 	while (glfwWindowShouldClose(window) == false && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		Gizmos::clear();
+		//Gizmos::clear();
 		return true;
 	}
 	return false;
@@ -148,18 +143,18 @@ void RenderingGeometry::draw()
 	glUniformMatrix4fv(projectionViewUniform, 1, false,	glm::value_ptr(m_projectionViewMatrix));
 	
 	glBindVertexArray(m_VAO);
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, 17, GL_UNSIGNED_INT, 0);
 	glfwSwapBuffers(window);
 	glfwPollEvents();
 }
 
 void RenderingGeometry::destroy()
 {
-	glDeleteProgram(m_programID);	
-	glDeleteVertexArrays(1, &m_VAO);	
-	glDeleteBuffers(1, &m_VBO);			
-	glDeleteBuffers(1, &m_IBO);
-	Gizmos::destroy();
+	//glDeleteProgram(m_programID);	
+	//glDeleteVertexArrays(1, &m_VAO);	
+	//glDeleteBuffers(1, &m_VBO);			
+	//glDeleteBuffers(1, &m_IBO);
+	//Gizmos::destroy();
 	glfwDestroyWindow(window);
 	glfwTerminate();
 }
