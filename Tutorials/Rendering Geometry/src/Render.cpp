@@ -22,6 +22,16 @@ void RenderingGeometry::generatePlane()
 	vertices[3].color = glm::vec4(1, 1, 1, 1);
 }
 
+void RenderingGeometry::generateCube()
+{
+
+}
+
+void RenderingGeometry::generateSphere()
+{
+
+}
+
 bool RenderingGeometry::start()
 {
 	if (glfwInit() == false)
