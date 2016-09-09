@@ -92,7 +92,8 @@ bool RenderingGeometry::start()
 	const char* fsSource = "#version 410\n \
 							in vec4 vColour; \
 							out vec4 FragColor; \
-							void main() { FragColor = vColour; }";
+							void main() { FragColor = vColour; }";
+
 
 	int success = GL_FALSE;
 	unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
