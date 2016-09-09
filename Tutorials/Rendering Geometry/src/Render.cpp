@@ -1,5 +1,5 @@
 #include "Render.h"
-using glm::vec4;
+
 RenderingGeometry::RenderingGeometry()
 {
 	
