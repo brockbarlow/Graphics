@@ -15,7 +15,7 @@ public:
 	bool update() override;
 	void draw() override;
 	void destroy() override;
-	//void generatePlane();
+	void generatePlane();
 private:
 	glm::mat4 m_projectionViewMatrix;
 	glm::mat4 view;
@@ -28,16 +28,3 @@ private:
 	int rows;
 	int cols;
 };
-
-/*Vertex vertices[4];
-	unsigned int indices[4] = { 0,1,2,3 };
-
-	vertices[0].position = glm::vec4(-5, 0, -5, 1);
-	vertices[1].position = glm::vec4(5, 0, -5, 1);
-	vertices[2].position = glm::vec4(-5, 0, 5, 1);
-	vertices[3].position = glm::vec4(5, 0, 5, 1);
-
-	vertices[0].color = glm::vec4(1, 0, 0, 1);
-	vertices[1].color = glm::vec4(0, 1, 0, 1);
-	vertices[2].color = glm::vec4(0, 0, 1, 1);
-	vertices[3].color = glm::vec4(1, 1, 1, 1);*/
