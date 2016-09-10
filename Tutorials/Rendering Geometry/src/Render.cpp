@@ -9,7 +9,6 @@ RenderingGeometry::RenderingGeometry()
 	if (window == nullptr)
 	{
 		glfwTerminate();
-		//return false;
 	}
 
 	glfwMakeContextCurrent(window);
@@ -18,13 +17,11 @@ RenderingGeometry::RenderingGeometry()
 	{
 		glfwDestroyWindow(window);
 		glfwTerminate();
-		//return false;
 	}
 
 	view = glm::lookAt(glm::vec3(8, 8, 8), glm::vec3(0), glm::vec3(0, 1, 0));
 	projection = glm::perspective(glm::pi<float>() * 0.25f, 16 / 9.f, 0.1f, 1000.f);
 
-	//Gizmos::create();
 	glClearColor(0.25f, 0.25f, 0.25f, 1);
 	glEnable(GL_DEPTH_TEST);
 }
@@ -33,7 +30,15 @@ bool RenderingGeometry::start()
 {
 	generatePlane(); //generate the plane
 
-	const char* vsSource = "#version 410\n \
+	const char* vsSource;						
+	std::string vs = ReadFromFile("vsInfo.txt");	
+	vsSource = vs.c_str();						
+
+	const char* fsSource;	
+	std::string fs = ReadFromFile("fsInfo.txt");
+	fsSource = fs.c_str();
+
+	/*const char* vsSource = "#version 410\n \
 							layout(location=0) in vec4 position; \
 							layout(location=1) in vec4 colour; \
 							out vec4 vColour; \
@@ -44,7 +49,7 @@ bool RenderingGeometry::start()
 	const char* fsSource = "#version 410\n \
 							in vec4 vColour; \
 							out vec4 fragColor; \
-							void main() { fragColor = vColour; }";
+							void main() { fragColor = vColour; }";*/
 
 	int success = GL_FALSE;
 	unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
@@ -79,7 +84,19 @@ bool RenderingGeometry::start()
 
 std::string RenderingGeometry::ReadFromFile(std::string text)
 {
+	std::string data;
+	std::string container;
+	std::ifstream file(text);
 
+	if (file.is_open())
+	{
+		while (std::getline(file, data))
+		{
+			container += data + "\n";
+		}
+		file.close();
+	}
+	return container;
 }
 
 void RenderingGeometry::generatePlane()
@@ -132,7 +149,6 @@ bool RenderingGeometry::update()
 	while (glfwWindowShouldClose(window) == false && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		//Gizmos::clear();
 		return true;
 	}
 	return false;
@@ -148,18 +164,13 @@ void RenderingGeometry::draw()
 	glUniformMatrix4fv(projectionViewUniform, 1, false,	glm::value_ptr(m_projectionViewMatrix));
 	
 	glBindVertexArray(m_VAO);
-	glDrawElements(GL_TRIANGLES, 17, GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 	glfwSwapBuffers(window);
 	glfwPollEvents();
 }
 
 void RenderingGeometry::destroy()
 {
-	//glDeleteProgram(m_programID);	
-	//glDeleteVertexArrays(1, &m_VAO);	
-	//glDeleteBuffers(1, &m_VBO);			
-	//glDeleteBuffers(1, &m_IBO);
-	//Gizmos::destroy();
 	glfwDestroyWindow(window);
 	glfwTerminate();
 }

@@ -6,8 +6,7 @@ out vec4 vColour;
 uniform mat4 projectionViewWorldMatrix;
 void main()
 {
-	vec4 a = position;
 	vColour = colour;
-	gl_Postion = projectionViewWorldMatrix * a;
+	gl_Position = projectionViewWorldMatrix * position;
 
 }
