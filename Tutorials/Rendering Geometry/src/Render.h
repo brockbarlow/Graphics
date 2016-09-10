@@ -15,6 +15,7 @@ public:
 	bool update() override;
 	void draw() override;
 	void destroy() override;
+	std::string ReadFromFile(std::string text);
 	void generatePlane();
 	void generateCube();
 	void generateSphere();

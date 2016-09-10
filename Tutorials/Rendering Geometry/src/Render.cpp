@@ -34,17 +34,17 @@ bool RenderingGeometry::start()
 	generatePlane(); //generate the plane
 
 	const char* vsSource = "#version 410\n \
-							layout(location=0) in vec4 Position; \
-							layout(location=1) in vec4 Colour; \
+							layout(location=0) in vec4 position; \
+							layout(location=1) in vec4 colour; \
 							out vec4 vColour; \
 							uniform mat4 ProjectionViewWorld; \
-							void main() { vColour = Colour; \
-							gl_Position = ProjectionViewWorld * Position; }";
+							void main() { vColor = color; \
+							gl_Position = ProjectionViewWorld * position; }";
 
 	const char* fsSource = "#version 410\n \
 							in vec4 vColour; \
-							out vec4 FragColor; \
-							void main() { FragColor = vColour; }";
+							out vec4 fragColor; \
+							void main() { fragColor = vColour; }";
 
 	int success = GL_FALSE;
 	unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
@@ -75,6 +75,11 @@ bool RenderingGeometry::start()
 	glDeleteShader(vertexShader);
 	
 	return true;
+}
+
+std::string RenderingGeometry::ReadFromFile(std::string text)
+{
+
 }
 
 void RenderingGeometry::generatePlane()
