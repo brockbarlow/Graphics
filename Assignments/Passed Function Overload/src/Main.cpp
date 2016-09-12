@@ -5,8 +5,20 @@ Explain why/why not.*/
 
 #include <iostream>
 
+void tryOverload()
+{
+
+}
+
+int addFunc()
+{
+
+}
+
 int main()
 {
+
+
 	system("pause");
 	return 0;
 }
