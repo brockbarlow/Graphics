@@ -28,9 +28,9 @@ RenderingGeometry::RenderingGeometry()
 
 bool RenderingGeometry::start()
 {
-	generatePlane(); //generate the plane
-	//generateCube();
-	//generateSphere();
+	//generatePlane();  //generates the plane.
+	generateCube();     //generates a cube.
+	//generateSphere(); //generates a sphere.
 
 	const char* vsSource;						
 	std::string vs = ReadFromFile("vsInfo.txt");	
@@ -127,8 +127,10 @@ void RenderingGeometry::generatePlane()
 
 void RenderingGeometry::generateCube()
 {
-	/*Vertex vertices[4];
+	Vertex vertices[4];
 	unsigned int indices[4] = { 0,1,2,3 };
+
+	indicesCounter = 4;
 
 	vertices[0].position = glm::vec4(-5, 0, -5, 1);
 	vertices[1].position = glm::vec4(5, 0, -5, 1);
@@ -157,7 +159,7 @@ void RenderingGeometry::generateCube()
 
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);*/
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
 void RenderingGeometry::generateSphere()
