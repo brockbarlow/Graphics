@@ -12,32 +12,26 @@ ex 2: typedef (void*)Callback(char c[]);
 
 #include <iostream>
 
-typedef int(*pointer)(const char* c);
-
-bool checkCalculation(int pointer, int size)
+void checkCalculation(int(*f)(char*), char* ex)
 {
-	//assert(pointer == size && "Error! ");
-
-	/*if (pointer == size)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}*/
+	std::cout << f(ex);
 }
 
-int calculateLength(const char* c)
+int calculateLength(char* c)
 {
-
+	char* p = &c[0];			
+	int result = 0;		
+	for (; *p != NULL; p++) {		
+		result++;
+	}
+	return result;
 }
 
 int main()
 {
-	const char* c = { "Hello." };
+	char c[] = { "Hello." };
 
-	//checkCalculation(calculateLength(c));
+	checkCalculation(calculateLength, c);
 
 	system("pause");
 	return 0;
