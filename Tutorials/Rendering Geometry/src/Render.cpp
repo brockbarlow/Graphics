@@ -209,11 +209,9 @@ void RenderingGeometry::draw()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glUseProgram(m_programID);
-	
 	unsigned int projectionViewUniform = glGetUniformLocation(m_programID, "projectionViewWorldMatrix");
 	m_projectionViewMatrix = projection * view;
 	glUniformMatrix4fv(projectionViewUniform, 1, false,	glm::value_ptr(m_projectionViewMatrix));
-	
 	glBindVertexArray(m_VAO);
 	glDrawElements(GL_TRIANGLES, indicesCounter, GL_UNSIGNED_INT, 0);
 	glfwSwapBuffers(window);
