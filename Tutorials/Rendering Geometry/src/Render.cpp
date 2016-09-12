@@ -213,7 +213,7 @@ void RenderingGeometry::draw()
 	m_projectionViewMatrix = projection * view;
 	glUniformMatrix4fv(projectionViewUniform, 1, false,	glm::value_ptr(m_projectionViewMatrix));
 	glBindVertexArray(m_VAO);
-	glDrawElements(GL_TRIANGLES, indicesCounter, GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLE_STRIP, indicesCounter, GL_UNSIGNED_INT, 0);
 	glfwSwapBuffers(window);
 	glfwPollEvents();
 }
