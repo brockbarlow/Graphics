@@ -23,6 +23,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Min and Max Functions", "Mi
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Character Array Length", "Character Array Length\Character Array Length.vcxproj", "{49455E91-5560-4E27-B368-447348C0D5B0}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Passed Function Overload", "Passed Function Overload\Passed Function Overload.vcxproj", "{6FF5ADD7-A75E-42C0-906F-E319595A48F0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -111,6 +113,14 @@ Global
 		{49455E91-5560-4E27-B368-447348C0D5B0}.Release|x64.Build.0 = Release|x64
 		{49455E91-5560-4E27-B368-447348C0D5B0}.Release|x86.ActiveCfg = Release|Win32
 		{49455E91-5560-4E27-B368-447348C0D5B0}.Release|x86.Build.0 = Release|Win32
+		{6FF5ADD7-A75E-42C0-906F-E319595A48F0}.Debug|x64.ActiveCfg = Debug|x64
+		{6FF5ADD7-A75E-42C0-906F-E319595A48F0}.Debug|x64.Build.0 = Debug|x64
+		{6FF5ADD7-A75E-42C0-906F-E319595A48F0}.Debug|x86.ActiveCfg = Debug|Win32
+		{6FF5ADD7-A75E-42C0-906F-E319595A48F0}.Debug|x86.Build.0 = Debug|Win32
+		{6FF5ADD7-A75E-42C0-906F-E319595A48F0}.Release|x64.ActiveCfg = Release|x64
+		{6FF5ADD7-A75E-42C0-906F-E319595A48F0}.Release|x64.Build.0 = Release|x64
+		{6FF5ADD7-A75E-42C0-906F-E319595A48F0}.Release|x86.ActiveCfg = Release|Win32
+		{6FF5ADD7-A75E-42C0-906F-E319595A48F0}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
