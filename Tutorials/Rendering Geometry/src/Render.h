@@ -3,8 +3,8 @@
 
 struct Vertex
 {
-	glm::vec4 color;
 	glm::vec4 position;
+	glm::vec4 color;
 };
 
 class RenderingGeometry : public Application {
@@ -28,4 +28,5 @@ private:
 	unsigned int m_VAO;
 	unsigned int m_VBO;
 	unsigned int m_IBO;
+	int indicesCounter;
 };

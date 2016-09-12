@@ -4,7 +4,7 @@ RenderingGeometry::RenderingGeometry()
 {
 	glfwInit();
 
-	window = glfwCreateWindow(1280, 720, "Computer Graphics", nullptr, nullptr);
+	window = glfwCreateWindow(1280, 720, "Rendering Geometry", nullptr, nullptr);
 
 	if (window == nullptr)
 	{
@@ -19,7 +19,7 @@ RenderingGeometry::RenderingGeometry()
 		glfwTerminate();
 	}
 
-	view = glm::lookAt(glm::vec3(8, 8, 8), glm::vec3(0), glm::vec3(0, 1, 0));
+	view = glm::lookAt(glm::vec3(10, 10, 10), glm::vec3(0), glm::vec3(0, 1, 0));
 	projection = glm::perspective(glm::pi<float>() * 0.25f, 16 / 9.f, 0.1f, 1000.f);
 
 	glClearColor(0.25f, 0.25f, 0.25f, 1);
@@ -29,6 +29,8 @@ RenderingGeometry::RenderingGeometry()
 bool RenderingGeometry::start()
 {
 	generatePlane(); //generate the plane
+	//generateCube();
+	//generateSphere();
 
 	const char* vsSource;						
 	std::string vs = ReadFromFile("vsInfo.txt");	
@@ -37,19 +39,6 @@ bool RenderingGeometry::start()
 	const char* fsSource;	
 	std::string fs = ReadFromFile("fsInfo.txt");
 	fsSource = fs.c_str();
-
-	/*const char* vsSource = "#version 410\n \
-							layout(location=0) in vec4 position; \
-							layout(location=1) in vec4 colour; \
-							out vec4 vColour; \
-							uniform mat4 ProjectionViewWorld; \
-							void main() { vColor = color; \
-							gl_Position = ProjectionViewWorld * position; }";
-
-	const char* fsSource = "#version 410\n \
-							in vec4 vColour; \
-							out vec4 fragColor; \
-							void main() { fragColor = vColour; }";*/
 
 	int success = GL_FALSE;
 	unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
@@ -103,6 +92,8 @@ void RenderingGeometry::generatePlane()
 {
 	Vertex vertices[4];
 	unsigned int indices[4] = { 0,1,2,3 };
+
+	indicesCounter = 4;
 
 	vertices[0].position = glm::vec4(-5, 0, -5, 1);
 	vertices[1].position = glm::vec4(5, 0, -5, 1);
@@ -218,13 +209,13 @@ void RenderingGeometry::draw()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glUseProgram(m_programID);
+	
 	unsigned int projectionViewUniform = glGetUniformLocation(m_programID, "projectionViewWorldMatrix");
-
 	m_projectionViewMatrix = projection * view;
 	glUniformMatrix4fv(projectionViewUniform, 1, false,	glm::value_ptr(m_projectionViewMatrix));
 	
 	glBindVertexArray(m_VAO);
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, indicesCounter, GL_UNSIGNED_INT, 0);
 	glfwSwapBuffers(window);
 	glfwPollEvents();
 }

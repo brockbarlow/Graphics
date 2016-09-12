@@ -7,6 +7,7 @@
 #include <ext.hpp>
 #include <fstream>
 #include <string>
+#include <vector>
 
 class Application
 {
