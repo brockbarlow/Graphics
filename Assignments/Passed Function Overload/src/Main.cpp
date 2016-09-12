@@ -1,3 +1,8 @@
+/*Write a function that takes another function as a parameter.
+The passed function only needs to add two numbers.
+Can the passed function be overloaded?
+Explain why/why not.*/
+
 #include <iostream>
 
 int main()
