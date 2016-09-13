@@ -30,7 +30,7 @@ bool RenderingGeometry::start()
 {
 	//createPlane();  //creates the plane.
 	//createCube();   //creates a cube.
-	//createSphere(); //creates a sphere.
+	createSphere(); //creates a sphere.
 
 	const char* vsSource;						
 	std::string vs = ReadFromFile("vsInfo.txt");	
@@ -162,49 +162,48 @@ void RenderingGeometry::createCube()
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
-std::vector<unsigned int> RenderingGeometry::generateVertices(int nm, int np)
+//std::vector<unsigned int> RenderingGeometry::generateVertices(int nm, int np)
+//{
+//	std::vector<unsigned int> indices;
+//
+//	//j=np-1
+//	//		
+//	//2		5	8	11	14	17
+//	//1     4	7	10	13	16
+//	//0		3	6	9	12	15		
+//	//	
+//
+//	for (unsigned int i = 0; i < nm; i++) //nm = 4
+//	{
+//		unsigned int start = i * np;
+//		for (int j = 0; j < np; j++) //np = 3
+//		{
+//			unsigned int botR = (start + np + j);
+//			unsigned int botL = (start + j);
+//			indices.push_back(botL);
+//			indices.push_back(botR);
+//		}
+//		indices.push_back(0xFFFF);
+//	} //we copied the origin whenever we rotated around nm + 1 times so we dont need to get the end again
+//	return indices;
+//}
+
+Vertex* RenderingGeometry::generateVertices(unsigned int np, int rad)
 {
-	std::vector<unsigned int> indices;
+	Vertex* vertices = new Vertex[np];
 
-	//j=np-1
-	//		
-	//2		5	8	11	14	17
-	//1     4	7	10	13	16
-	//0		3	6	9	12	15		
-	//	
-
-	for (unsigned int i = 0; i < nm; i++) //nm = 4
+	for (int i = 0; i < np; i++)
 	{
-		unsigned int start = i * np;
-		for (int j = 0; j < np; j++) //np = 3
-		{
-			unsigned int botR = (start + np + j);
-			unsigned int botL = (start + j);
-			indices.push_back(botL);
-			indices.push_back(botR);
-		}
-		indices.push_back(0xFFFF);
-
-	} //we copied the origin whenever we rotated around nm + 1 times so we dont need to get the end again
-	return indices;
+		angle = pi * (i / (np - 1));
+		vertices[i].position = glm::vec4(rad * cos(angle), rad * sin(angle), 0, 1);
+	}
+	return vertices;
 }
 
-//Vertex* RenderingGeometry::generateVertices(unsigned int np, const int rad)
-//{
-//	Vertex* vector = new Vertex[np];
-//
-//	for (int i = 0; i < np; i++)
-//	{
-//		angle = pi * (i / (np - 1));
-//		vector[i].position = glm::vec4(rad * cos(angle), rad * sin(angle), 0, 1);
-//	}
-//	return vector;
-//}
-//
-//Vertex* RenderingGeometry::generateSphere()
-//{
-//
-//}
+Vertex* RenderingGeometry::generateSphere(unsigned int np, unsigned int nm, Vertex* hc)
+{
+
+}
 
 void RenderingGeometry::createSphere()
 {
