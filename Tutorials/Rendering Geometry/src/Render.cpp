@@ -28,9 +28,9 @@ RenderingGeometry::RenderingGeometry()
 
 bool RenderingGeometry::start()
 {
-	//createPlane();  //generates the plane.
-	createCube();     //generates a cube.
-	//createSphere(); //generates a sphere.
+	//createPlane();  //creates the plane.
+	//createCube();   //creates a cube.
+	//createSphere(); //creates a sphere.
 
 	const char* vsSource;						
 	std::string vs = ReadFromFile("vsInfo.txt");	
@@ -132,10 +132,10 @@ void RenderingGeometry::createCube()
 
 	indicesCounter = 4;
 
-	vertices[0].position = glm::vec4(-5, 0, -5, 1);
-	vertices[1].position = glm::vec4(5, 0, -5, 1);
-	vertices[2].position = glm::vec4(-5, 0, 5, 1);
-	vertices[3].position = glm::vec4(5, 0, 5, 1);
+	vertices[0].position = glm::vec4(-2, 0, -2, 1);
+	vertices[1].position = glm::vec4(2, 0, -2, 1);
+	vertices[2].position = glm::vec4(-2, 0, 2, 1);
+	vertices[3].position = glm::vec4(2, 0, 2, 1);
 
 	vertices[0].color = glm::vec4(1, 0, 0, 1);
 	vertices[1].color = glm::vec4(0, 1, 0, 1);
@@ -162,7 +162,19 @@ void RenderingGeometry::createCube()
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
-Vertex* RenderingGeometry::generateHalfSphere(int p, int rad, Vertex* verts)
+Vertex* RenderingGeometry::generateVertices(unsigned int np, const int rad)
+{
+	Vertex* vector = new Vertex[np];
+
+	for (int i = 0; i < np; i++)
+	{
+		angle = pi * (i / (np - 1));
+		vector[i].position = glm::vec4(rad * cos(angle), rad * sin(angle), 0, 1);
+	}
+	return vector;
+}
+
+Vertex* RenderingGeometry::generateSphere()
 {
 
 }
