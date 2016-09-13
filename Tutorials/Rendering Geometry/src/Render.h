@@ -29,4 +29,5 @@ private:
 	unsigned int m_VBO;
 	unsigned int m_IBO;
 	int indicesCounter;
+	float pi = 3.14159265359f;
 };
