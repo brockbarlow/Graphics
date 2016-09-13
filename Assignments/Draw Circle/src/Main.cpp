@@ -45,5 +45,3 @@ int main()
 	system("pause");
 	return 0;
 }
-
-/*I need help.*/
