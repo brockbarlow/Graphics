@@ -28,9 +28,9 @@ RenderingGeometry::RenderingGeometry()
 
 bool RenderingGeometry::start()
 {
-	//generatePlane();  //generates the plane.
-	generateCube();     //generates a cube.
-	//generateSphere(); //generates a sphere.
+	//createPlane();  //generates the plane.
+	createCube();     //generates a cube.
+	//createSphere(); //generates a sphere.
 
 	const char* vsSource;						
 	std::string vs = ReadFromFile("vsInfo.txt");	
@@ -88,7 +88,7 @@ std::string RenderingGeometry::ReadFromFile(std::string text)
 	return container;
 }
 
-void RenderingGeometry::generatePlane()
+void RenderingGeometry::createPlane()
 {
 	Vertex vertices[4];
 	unsigned int indices[4] = { 0,1,2,3 };
@@ -125,7 +125,7 @@ void RenderingGeometry::generatePlane()
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
-void RenderingGeometry::generateCube()
+void RenderingGeometry::createCube()
 {
 	Vertex vertices[4];
 	unsigned int indices[4] = { 0,1,2,3 };
@@ -162,39 +162,14 @@ void RenderingGeometry::generateCube()
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
-void RenderingGeometry::generateSphere()
+Vertex* RenderingGeometry::generateHalfSphere(int p, int rad, Vertex* verts)
 {
-	/*Vertex vertices[4];
-	unsigned int indices[4] = { 0,1,2,3 };
 
-	vertices[0].position = glm::vec4(-5, 0, -5, 1);
-	vertices[1].position = glm::vec4(5, 0, -5, 1);
-	vertices[2].position = glm::vec4(-5, 0, 5, 1);
-	vertices[3].position = glm::vec4(5, 0, 5, 1);
+}
 
-	vertices[0].color = glm::vec4(1, 0, 0, 1);
-	vertices[1].color = glm::vec4(0, 1, 0, 1);
-	vertices[2].color = glm::vec4(0, 0, 1, 1);
-	vertices[3].color = glm::vec4(1, 1, 1, 1);
-
-	glGenBuffers(1, &m_VBO);
-	glGenBuffers(1, &m_IBO);
-	glGenVertexArrays(1, &m_VAO);
-	glBindVertexArray(m_VAO);
-
-	glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-	glBufferData(GL_ARRAY_BUFFER, 4 * sizeof(Vertex), vertices, GL_STATIC_DRAW);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 4 * sizeof(unsigned int), indices, GL_STATIC_DRAW);
-
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(sizeof(glm::vec4)));
-
-	glBindVertexArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);*/
+void RenderingGeometry::createSphere()
+{
+	
 }
 
 bool RenderingGeometry::update()

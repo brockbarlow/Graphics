@@ -16,9 +16,10 @@ public:
 	void draw() override;
 	void destroy() override;
 	std::string ReadFromFile(std::string text);
-	void generatePlane();
-	void generateCube();
-	void generateSphere();
+	void createPlane();
+	void createCube();
+	Vertex* generateHalfSphere(int p, int rad, Vertex* verts);
+	void createSphere();
 private:
 	glm::mat4 m_projectionViewMatrix;
 	glm::mat4 view;
@@ -30,4 +31,5 @@ private:
 	unsigned int m_IBO;
 	int indicesCounter;
 	float pi = 3.14159265359f;
+	float angle = 0;
 };
