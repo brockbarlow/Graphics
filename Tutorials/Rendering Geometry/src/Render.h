@@ -8,7 +8,6 @@ struct Vertex
 };
 
 class RenderingGeometry : public Application {
-
 public:
 	RenderingGeometry();
 	bool start() override;
@@ -18,8 +17,9 @@ public:
 	std::string ReadFromFile(std::string text);
 	void createPlane();
 	void createCube();
-	Vertex* generateVertices(unsigned int np, const int rad);
-	Vertex* generateSphere();
+	std::vector<unsigned int> generateVertices(int nm, int np);
+	//Vertex* generateVertices(unsigned int np, const int rad);
+	//Vertex* generateSphere();
 	void createSphere();
 private:
 	glm::mat4 m_projectionViewMatrix;
