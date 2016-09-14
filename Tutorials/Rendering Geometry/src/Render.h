@@ -17,7 +17,8 @@ public:
 	std::string ReadFromFile(std::string text);
 	void createPlane();
 	void createCube();
-	Vertex* generateVertices(unsigned int np, const int &rad);
+	Vertex* generateHalfSphereVertices(unsigned int np, const int &rad);
+	Vertex* generateSphereVertices(const unsigned int &sides, const unsigned int &mirid, Vertex* &halfSphere);
 	void createSphere();
 private:
 	glm::mat4 m_projectionViewMatrix;

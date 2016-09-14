@@ -162,16 +162,33 @@ void RenderingGeometry::createCube()
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
-Vertex* RenderingGeometry::generateVertices(unsigned int np, const int &rad)
+Vertex* RenderingGeometry::generateHalfSphereVertices(unsigned int np, const int &rad)
 {
 	Vertex* vertices = new Vertex[np];
 
 	for (int i = 0; i < np; i++)
 	{
 		angle = pi * (i / (np - 1));
-		vertices[i].position = glm::vec4(rad * cos(angle), rad * sin(angle), 0, 1);
+		vertices[i].position = glm::vec4(rad * sin(angle), rad * cos(angle), 0, 1);
 	}
 	return vertices;
+}
+
+Vertex* RenderingGeometry::generateSphereVertices(const unsigned int &sides, const unsigned int &mirid, Vertex* &halfSphere)
+{
+	int count = 0;
+	Vertex* vertices = new Vertex[sides * mirid];
+
+	for (int i = 0; i < mirid; i++)
+	{
+		float phi = 2 * (pi * ((float)i / (float)(mirid)));
+		for (int j = 0; j < sides; j++, count++)
+		{
+			float x;
+			float y;
+			float z;
+		}
+	}
 }
 
 void RenderingGeometry::createSphere()
