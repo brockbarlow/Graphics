@@ -30,7 +30,7 @@ bool RenderingGeometry::start()
 {
 	//createPlane();  //creates the plane.
 	//createCube();   //creates a cube.
-	createSphere(); //creates a sphere.
+	createSphere();   //creates a sphere.
 
 	const char* vsSource;						
 	std::string vs = ReadFromFile("vsInfo.txt");	
@@ -225,6 +225,10 @@ void RenderingGeometry::draw()
 
 void RenderingGeometry::destroy()
 {
+	glDeleteProgram(m_programID);		
+	glDeleteVertexArrays(1, &m_VAO);	
+	glDeleteBuffers(1, &m_VBO);			
+	glDeleteBuffers(1, &m_IBO);
 	glfwDestroyWindow(window);
 	glfwTerminate();
 }
