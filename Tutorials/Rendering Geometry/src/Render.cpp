@@ -184,11 +184,15 @@ Vertex* RenderingGeometry::generateSphereVertices(const unsigned int &sides, con
 		float phi = 2 * (pi * ((float)i / (float)(mirid)));
 		for (int j = 0; j < sides; j++, count++)
 		{
-			float x;
-			float y;
-			float z;
+			float x = halfSphere[j].position.x * cos(phi) + halfSphere[j].position.z * sin(phi);
+			float y = halfSphere[j].position.y;
+			float z = halfSphere[j].position.z * -sin(phi) + halfSphere[j].position.x * cos(phi);
+
+			vertices[count].position = glm::vec4(x, y, z, 1);
+			vertices[count].color = glm::vec4(1, 0, 0, 1);
 		}
 	}
+	return vertices;
 }
 
 void RenderingGeometry::createSphere()
