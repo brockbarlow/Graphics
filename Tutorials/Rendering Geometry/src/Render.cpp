@@ -127,20 +127,28 @@ void RenderingGeometry::createPlane()
 
 void RenderingGeometry::createCube()
 {
-	Vertex vertices[4];
-	unsigned int indices[4] = { 0,1,2,3 };
+	Vertex vertices[8];
+	unsigned int indices[17] = { 0,1,2,3,6,7,4,5,0,1,5,3,7,6,4,2,0 };
 
-	indicesCounter = 4;
+	indicesCounter = 17;
 
 	vertices[0].position = glm::vec4(-2, 0, -2, 1);
 	vertices[1].position = glm::vec4(2, 0, -2, 1);
 	vertices[2].position = glm::vec4(-2, 0, 2, 1);
 	vertices[3].position = glm::vec4(2, 0, 2, 1);
+	vertices[4].position = glm::vec4(-2, 4, -2, 1);
+	vertices[5].position = glm::vec4(2, 4, -2, 1);
+	vertices[6].position = glm::vec4(-2, 4, 2, 1);
+	vertices[7].position = glm::vec4(2, 4, 2, 1);
 
 	vertices[0].color = glm::vec4(1, 0, 0, 1);
 	vertices[1].color = glm::vec4(0, 1, 0, 1);
 	vertices[2].color = glm::vec4(0, 0, 1, 1);
 	vertices[3].color = glm::vec4(1, 1, 1, 1);
+	vertices[4].color = glm::vec4(1, 0, 0, 1);
+	vertices[5].color = glm::vec4(0, 1, 0, 1);
+	vertices[6].color = glm::vec4(0, 0, 1, 1);
+	vertices[7].color = glm::vec4(1, 1, 1, 1);
 
 	glGenBuffers(1, &m_VBO);
 	glGenBuffers(1, &m_IBO);
@@ -148,9 +156,9 @@ void RenderingGeometry::createCube()
 	glBindVertexArray(m_VAO);
 
 	glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-	glBufferData(GL_ARRAY_BUFFER, 4 * sizeof(Vertex), vertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 8 * sizeof(Vertex), vertices, GL_STATIC_DRAW);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 4 * sizeof(unsigned int), indices, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 17 * sizeof(unsigned int), indices, GL_STATIC_DRAW);
 
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
@@ -219,7 +227,8 @@ void RenderingGeometry::draw()
 	glUniformMatrix4fv(projectionViewUniform, 1, false,	glm::value_ptr(m_projectionViewMatrix));
 	glBindVertexArray(m_VAO);
 	glPointSize(5.f);
-	glDrawElements(/*GL_TRIANGLE_STRIP*/GL_POINTS, indicesCounter, GL_UNSIGNED_INT, 0);
+	//glDrawElements(GL_TRIANGLE_STRIP, indicesCounter, GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_POINTS, indicesCounter, GL_UNSIGNED_INT, 0);
 	glfwSwapBuffers(window);
 	glfwPollEvents();
 }
