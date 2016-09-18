@@ -19,7 +19,7 @@ RenderingGeometry::RenderingGeometry()
 		glfwTerminate();
 	}
 
-	view = glm::lookAt(glm::vec3(10, 10, 10), glm::vec3(0), glm::vec3(0, 1, 0));
+	view = glm::lookAt(glm::vec3(15, 15, 15), glm::vec3(0), glm::vec3(0, 1, 0));
 	projection = glm::perspective(glm::pi<float>() * 0.25f, 16 / 9.f, 0.1f, 1000.f);
 
 	glClearColor(0.25f, 0.25f, 0.25f, 1);
@@ -95,10 +95,10 @@ void RenderingGeometry::createPlane()
 
 	indicesCounter = 4;
 
-	vertices[0].position = glm::vec4(-5, 0, -5, 1);
-	vertices[1].position = glm::vec4(5, 0, -5, 1);
-	vertices[2].position = glm::vec4(-5, 0, 5, 1);
-	vertices[3].position = glm::vec4(5, 0, 5, 1);
+	vertices[0].position = glm::vec4(-2, 0, -2, 1);
+	vertices[1].position = glm::vec4(2, 0, -2, 1);
+	vertices[2].position = glm::vec4(-2, 0, 2, 1);
+	vertices[3].position = glm::vec4(2, 0, 2, 1);
 
 	vertices[0].color = glm::vec4(1, 0, 0, 1);
 	vertices[1].color = glm::vec4(0, 1, 0, 1);
@@ -176,8 +176,9 @@ Vertex* RenderingGeometry::generateHalfSphereVertices(unsigned int np, const int
 
 	for (int i = 0; i < np; i++)
 	{
-		angle = pi * (i / (np - 1));
-		vertices[i].position = glm::vec4(rad * sin(angle), rad * cos(angle), 0, 1);
+		float angle = pi * i / (np - 1);
+		//vertices[i].position = glm::vec4(rad * sin(angle), rad * cos(angle), 0, 1);
+		vertices[i].position = glm::vec4(rad * cos(angle), rad * sin(angle), 0, 1);
 	}
 	return vertices;
 }
@@ -189,12 +190,17 @@ Vertex* RenderingGeometry::generateSphereVertices(const unsigned int &sides, con
 
 	for (int i = 0; i < mirid; i++)
 	{
-		float phi = 2 * (pi * ((float)i / (float)(mirid)));
+		float phi = 2.f * pi * ((float)i / (float)(mirid));
 		for (int j = 0; j < sides; j++, count++)
 		{
-			float x = halfSphere[j].position.x * cos(phi) + halfSphere[j].position.z * sin(phi);
-			float y = halfSphere[j].position.y;
-			float z = halfSphere[j].position.z * -sin(phi) + halfSphere[j].position.x * cos(phi);
+			//float x = halfSphere[j].position.x * cos(phi) + halfSphere[j].position.z * sin(phi);
+			//float y = halfSphere[j].position.y;
+			//float z = halfSphere[j].position.z * -sin(phi) + halfSphere[j].position.x * cos(phi);
+
+			float x = halfSphere[j].position.x;
+			float y = halfSphere[j].position.y * cos(phi) - halfSphere[j].position.z * sin(phi);
+			float z = halfSphere[j].position.z * cos(phi) + halfSphere[j].position.y * sin(phi);
+			
 
 			vertices[count].position = glm::vec4(x, y, z, 1);
 			vertices[count].color = glm::vec4(1, 0, 0, 1);
@@ -203,9 +209,62 @@ Vertex* RenderingGeometry::generateSphereVertices(const unsigned int &sides, con
 	return vertices;
 }
 
+unsigned int* RenderingGeometry::generateSphereIndicies(const unsigned int &vertices, const unsigned int &mirid)
+{
+	unsigned int* indices = new unsigned int[2 * (vertices * (mirid + 1))];
+	indicesCounter = 2 * (vertices * (mirid + 1));
+
+	for (unsigned int i = 0; i < mirid; i++)	
+	{
+		unsigned int beginning = i * vertices;
+		for (int j = 0; j < vertices; j++)
+		{
+			unsigned int botR = ((beginning + vertices + j) % (vertices * mirid));
+			unsigned int botL = ((beginning + j) % (vertices * mirid));
+			indicesHolder.push_back(botL);
+			indicesHolder.push_back(botR);
+		}
+		indicesHolder.push_back(0xFFFF);
+	}
+
+	for (int i = 0; i < indicesHolder.size(); i++) {
+		indices[i] = indicesHolder[i];
+	}
+	return indices;
+}
+
 void RenderingGeometry::createSphere()
 {
-	
+	const int radius = 5;
+	const unsigned int verts = 30;
+	const unsigned int halfSpheres = 30;
+	const unsigned int size = (verts) * (halfSpheres);
+
+	Vertex* vertices = new Vertex[size];
+	unsigned int* indices;
+
+	Vertex* halfSpheresVerts = generateHalfSphereVertices(verts, radius);		
+	vertices = generateSphereVertices(verts, halfSpheres, halfSpheresVerts);
+	indices = generateSphereIndicies(verts, halfSpheres);
+
+	glGenBuffers(1, &m_VBO);
+	glGenBuffers(1, &m_IBO);
+	glGenVertexArrays(1, &m_VAO);
+	glBindVertexArray(m_VAO);
+
+	glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
+	glBufferData(GL_ARRAY_BUFFER, size * sizeof(Vertex), vertices, GL_STATIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, (indicesCounter * sizeof(unsigned int)), indices, GL_STATIC_DRAW);
+
+	glEnableVertexAttribArray(0);	
+	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
+	glEnableVertexAttribArray(1);	
+	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
+
+	glBindVertexArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
 bool RenderingGeometry::update()
@@ -226,19 +285,13 @@ void RenderingGeometry::draw()
 	m_projectionViewMatrix = projection * view;
 	glUniformMatrix4fv(projectionViewUniform, 1, false,	glm::value_ptr(m_projectionViewMatrix));
 	glBindVertexArray(m_VAO);
-	glPointSize(5.f);
-	//glDrawElements(GL_TRIANGLE_STRIP, indicesCounter, GL_UNSIGNED_INT, 0);
-	glDrawElements(GL_POINTS, indicesCounter, GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLE_STRIP, indicesCounter, GL_UNSIGNED_INT, 0);
 	glfwSwapBuffers(window);
 	glfwPollEvents();
 }
 
 void RenderingGeometry::destroy()
 {
-	glDeleteProgram(m_programID);		
-	glDeleteVertexArrays(1, &m_VAO);	
-	glDeleteBuffers(1, &m_VBO);			
-	glDeleteBuffers(1, &m_IBO);
 	glfwDestroyWindow(window);
 	glfwTerminate();
 }

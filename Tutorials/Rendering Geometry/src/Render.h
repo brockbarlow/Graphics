@@ -19,6 +19,8 @@ public:
 	void createCube();
 	Vertex* generateHalfSphereVertices(unsigned int np, const int &rad);
 	Vertex* generateSphereVertices(const unsigned int &sides, const unsigned int &mirid, Vertex* &halfSphere);
+	unsigned int* generateSphereIndicies(const unsigned int &vertices, const unsigned int &mirid);
+	std::vector<unsigned int> indicesHolder;
 	void createSphere();
 private:
 	glm::mat4 m_projectionViewMatrix;
@@ -30,6 +32,5 @@ private:
 	unsigned int m_VBO;
 	unsigned int m_IBO;
 	int indicesCounter;
-	float pi = 3.14159265359f;
-	float angle = 0;
+	float pi = 3.14159265359;
 };
