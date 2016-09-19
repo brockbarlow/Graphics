@@ -1,9 +1,29 @@
 // classic Phong equation
 #version 410
 
-//in vec4 vColour;
-//out vec4 fragColor;
+in vec4 vPosition;
+in vec4 vNormal;
+out vec4 fragColor;
+
+uniform vec3 Ka;
+uniform vec3 Ia;
+uniform vec3 Kd;
+uniform vec3 Id;
+uniform vec3 Ks;
+uniform vec3 Is;
+
+uniform vec3 lightDirection;
+uniform vec3 cameraPosition;
+uniform float specularPower;
+
 void main()
 {
-	//fragColor = vColour;
+	vec4 ste = vPosition - vec4(cameraPosition,1);
+	vec4 Ambient = vec4(Ka,1) * vec4(Ia,1);
+	vec3 norLight = normalize(lightDirection) * -1;
+	vec4 convertLight = vec4(norLight,1);
+	vec3 Diffuse = Kd * max(0.0,dot(convertLight,vNormal)) * Id;
+	vec4 Reflection = 2 * dot(vNormal,convertLight) * vNormal - convertLight;
+	vec3 Specular = Ks * dot(Reflection, ste) * specularPower;
+	fragColor = Ambient + vec4(Diffuse + Specular,1);
 }
