@@ -32,4 +32,12 @@ int main()
 Problem 1:
 How is it possible to check if a number is positive,
 negative or zero without using >, >=, <, <=?
+
+Possible Solution to Problem 1:
+Instead of using >, >=, <, and <=, we could use:
+!>, !>=, !<, !<=.
+
+Problem 2:
+Confused about question. We need a multiply function, but
+we can only addition and subtraction?
 */
