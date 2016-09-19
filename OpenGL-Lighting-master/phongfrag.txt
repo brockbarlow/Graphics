@@ -17,6 +17,7 @@ uniform vec3 Is;
 uniform vec3 lightDirection;
 uniform vec3 cameraPosition;
 uniform float specularPower;
+uniform float specularTerm;
 
 void main()
 {
@@ -28,6 +29,8 @@ void main()
 	vec4 Reflection = 2 * dot(vNormal,convertLight) * vNormal - convertLight;
 	vec3 Specular = Ks * dot(Reflection, eye) * specularPower;
 	
+	//specularTerm = pow(max(0,dot(Reflection, )))
+
 	//fragColor = Ambient;
 	fragColor = vec4(Diffuse,1);
 	//fragColor = vec4(Specular,1);
