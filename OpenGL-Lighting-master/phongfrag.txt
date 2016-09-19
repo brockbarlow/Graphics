@@ -29,9 +29,11 @@ void main()
 	vec3 Specular = Ks * dot(Reflection, eye) * specularPower;
 	
 	//fragColor = Ambient;
-	//fragColor = vec4(Diffuse,1);
+	fragColor = vec4(Diffuse,1);
 	//fragColor = vec4(Specular,1);
-	fragColor = Ambient + vec4(Diffuse + Specular,1);
+	
+	//fragColor = Ambient + vec4(Diffuse,1);
+	//fragColor = Ambient + vec4(Diffuse + Specular,1);
 }
 
 //uniform vec4 Ka;
