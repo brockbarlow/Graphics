@@ -235,7 +235,7 @@ unsigned int* RenderingGeometry::generateSphereIndicies(const unsigned int &vert
 
 void RenderingGeometry::createSphere()
 {
-	const int radius = 5;
+	const unsigned int radius = 5;
 	const unsigned int verts = 30;
 	const unsigned int halfSpheres = 30;
 	const unsigned int size = (verts) * (halfSpheres);
