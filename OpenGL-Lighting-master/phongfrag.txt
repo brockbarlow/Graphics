@@ -7,8 +7,10 @@ out vec4 fragColor;
 
 uniform vec3 Ka;
 uniform vec3 Ia;
+
 uniform vec3 Kd;
 uniform vec3 Id;
+
 uniform vec3 Ks;
 uniform vec3 Is;
 
@@ -18,12 +20,30 @@ uniform float specularPower;
 
 void main()
 {
-	vec4 ste = vPosition - vec4(cameraPosition,1);
+	vec4 eye = vPosition - vec4(cameraPosition,1);
 	vec4 Ambient = vec4(Ka,1) * vec4(Ia,1);
 	vec3 norLight = normalize(lightDirection) * -1;
 	vec4 convertLight = vec4(norLight,1);
 	vec3 Diffuse = Kd * max(0.0,dot(convertLight,vNormal)) * Id;
 	vec4 Reflection = 2 * dot(vNormal,convertLight) * vNormal - convertLight;
-	vec3 Specular = Ks * dot(Reflection, ste) * specularPower;
+	vec3 Specular = Ks * dot(Reflection, eye) * specularPower;
+	
+	//fragColor = Ambient;
+	//fragColor = vec4(Diffuse,1);
+	//fragColor = vec4(Specular,1);
 	fragColor = Ambient + vec4(Diffuse + Specular,1);
 }
+
+//uniform vec4 Ka;
+//uniform vec4 Ia;
+//uniform vec4 Kd;
+//uniform vec4 Id;
+//uniform vec4 Ks;
+//uniform vec4 Is;
+//uniform vec4 lightDirection;
+//uniform vec4 cameraPosition;
+//vec4 Ambient = Ka * Ia;
+//vec4 Light = normalize(lightDirection) * -1;
+//vec4 Diffuse = Kd * max(0.0,dot(Light,vNormal)) * Id;
+//vec4 Specular = Ks * dot(Reflection, eye) * specularPower;
+//fragColor = Ambient + Diffuse + Specular;
