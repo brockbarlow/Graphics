@@ -36,6 +36,12 @@ void main()
 	vec3 Specular = Is * Ks * specularTerm;
 
 	fragColor = vec4(Diffuse + Ambient + Specular,1);
+	//fragColor = vec4(Ambient,1);
+	//fragColor = vec4(Diffuse,1);
+	//fragColor = vec4(Specular,1);
+	//fragColor = vec4(Ambient + Diffuse,1);
+	//fragColor = vec4(Ambient + Specular,1);
+	//fragColor = vec4(Diffuse + Specular,1);
 }
 
     //vec4 eye = vPosition - vec4(cameraPosition,1);
