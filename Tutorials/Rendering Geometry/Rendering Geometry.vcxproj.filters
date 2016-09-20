@@ -42,4 +42,8 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="fsInfo.txt" />
+    <Text Include="vsInfo.txt" />
+  </ItemGroup>
 </Project>
