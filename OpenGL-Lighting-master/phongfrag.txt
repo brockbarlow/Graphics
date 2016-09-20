@@ -27,9 +27,9 @@ void main()
 	vec3 blue = vec3(0,0,250);
 
 	float a = dot(N,vec3(0,1.f,0));
-	vec3 hemisphere = .5f * mix(red,blue,a) + .5f;
-	float specularTerm = pow(max(0.0,dot(Rm,V)),specularPower);
-	float lambertTerm = max(0.0,dot(N,Lm));
+	vec3 hemisphere = .5f * mix(blue,green,a) + .5f;
+	float specularTerm = pow(max(0.0f,dot(Rm,V)),specularPower);
+	float lambertTerm = max(0.0f,dot(N,Lm));
 
 	vec3 Ambient = (Ia * .01f) * (Ka) * hemisphere;
 	vec3 Diffuse = Kd * lambertTerm * Id;
@@ -43,41 +43,3 @@ void main()
 	//fragColor = vec4(Ambient + Specular,1);
 	//fragColor = vec4(Diffuse + Specular,1);
 }
-
-    //vec4 eye = vPosition - vec4(cameraPosition,1);
-	//vec4 Ambient = vec4(Ka,1) * vec4(Ia,1);
-	//vec3 norLight = normalize(lightDirection) * 1;
-	//vec4 convertLight = vec4(norLight,1);
-	//vec3 Diffuse = Kd * max(0.0,dot(convertLight,vNormal)) * Id;
-	//vec4 Reflection = 2 * dot(vNormal,convertLight) * vNormal - convertLight;
-	//vec3 Specular = Ks * dot(Reflection, eye) * specularPower;
-	//float specularTerm = pow(max(0,dot(Reflection, eye)), specularPower);
-	//vec3 red = vec3(250,0,0);
-	//vec3 green = vec3(0,250,0);
-	//vec3 blue = vec3(0,0,250);
-	//vec4 R = vec4(red,1);
-	//vec4 G = vec4(green,1);
-	//vec4 B = vec4(blue,1);
-	//float a = dot(vNormal,vec3(0,1.f,0));
-	//vec3 hemisphere = .5f * mix(red,blue,a) + .5f;
-	//vec4 Ambient = (vec4(Ia,1) * .01f) * (vec4(Ka,1)) * hemisphere;
-	//fragColor = Ambient;
-	//fragColor = vec4(Diffuse,1);
-	//fragColor = vec4(Specular,1);
-	//fragColor = Ambient + vec4(Diffuse,1);
-	//fragColor = Ambient + vec4(Diffuse + Specular,1);
-
-//uniform vec4 Ka;
-//uniform vec4 Ia;
-//uniform vec4 Kd;
-//uniform vec4 Id;
-//uniform vec4 Ks;
-//uniform vec4 Is;
-//uniform vec4 lightDirection;
-//uniform vec4 cameraPosition;
-//vec4 Ambient = Ka * Ia;
-//vec4 Light = normalize(lightDirection) * -1;
-//vec4 Diffuse = Kd * max(0.0,dot(Light,vNormal)) * Id;
-//vec4 Specular = Ks * dot(Reflection, eye) * specularPower;
-//fragColor = Ambient + Diffuse + Specular;
-//uniform float specularTerm;
