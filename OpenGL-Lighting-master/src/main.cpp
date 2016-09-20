@@ -10,6 +10,7 @@ int main() {
 		app->run();
 	app->shutdown();
 
+	//system("pause");
 
 	return 0;
 }
