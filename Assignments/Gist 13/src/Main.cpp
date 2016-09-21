@@ -18,8 +18,11 @@ reason for not understanding it and how someone could help you.
 */
 
 /*
-1) Directional Light - travels globally in a set direction. The core of Directional Light is about direction.
-   Point Light - emits across a volume. The core of Point Light is about position.
+1) Directional Light - travels globally in a set direction. The 
+   core of Directional Light is about direction.
+   
+   Point Light - emits across a volume. The core of Point Light 
+   is about position.
 */
 
 /*
@@ -28,7 +31,9 @@ reason for not understanding it and how someone could help you.
 
 /*
 3) Ambient Equation (Ia * Ka * hemisphere)
+   
    Diffuse Equation (Kd * lamberterm * Id)
+   
    Specular Equation (Is * Ks * specularTerm)
 */
 
@@ -38,9 +43,15 @@ reason for not understanding it and how someone could help you.
    by the id (point light source intensity) then mulitply that by
    the lamberterm (the clamped dot product of N and Lm where N is
    the normalized vNormal and Lm is the normalized lightDirection)
+
+   N - is the normalized vNormal
+   vNormal - is the NormalMatrix mulitpled by the normal
+   NormalMatrix - is a uniform mat4
+   normal - is a vec4 located in the layout location 2
+   Lm - is the normalized lightDirection
 */
 
 /*
 5) Information from the application is delivered to the shader
-   pipeline by buffering and binding data. 
+   pipeline by buffering and binding data.
 */
