@@ -28,9 +28,9 @@ RenderingGeometry::RenderingGeometry()
 
 bool RenderingGeometry::start()
 {
-	//createPlane();  //creates the plane.
-	//createCube();   //creates a cube.
-	createSphere();   //creates a sphere.
+	createPlane();  
+	createCube();   
+	createSphere();   
 
 	const char* vsSource;						
 	std::string vs = ReadFromFile("vsInfo.txt");	
@@ -303,6 +303,11 @@ void RenderingGeometry::draw()
 	//glDrawElements(GL_TRIANGLE_STRIP, indicesCounter, GL_UNSIGNED_INT, 0);
 	glPointSize(5.0f);
 	glDrawElements(GL_POINTS, indicesCounter, GL_UNSIGNED_INT, 0);
+	//
+	drawPlane();
+	drawCube();
+	drawSphere();
+	//
 	glfwSwapBuffers(window);
 	glfwPollEvents();
 }

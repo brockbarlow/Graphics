@@ -51,5 +51,5 @@ private:
 	int c_indicesCounter;
 	int s_indicesCounter;
 	//
-	float pi = 3.14159265359;
+	float pi = 3.14159265359f;
 };
