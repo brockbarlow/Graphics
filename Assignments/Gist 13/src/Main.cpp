@@ -27,14 +27,17 @@ reason for not understanding it and how someone could help you.
 */
 
 /*
-3) Ambient Equation - Ia * Ka * hemisphere
-   Diffuse Equation - Kd * lamberterm * Id
-   Specular Equation - Is * Ks * specularTerm
+3) Ambient Equation (Ia * Ka * hemisphere)
+   Diffuse Equation (Kd * lamberterm * Id)
+   Specular Equation (Is * Ks * specularTerm)
 */
 
 /*
-4) I do not know how the Diffuse calculation is created.
-   
+4) Diffuse Equation is created by:
+   taking the kd (material's reflection coefficient), mulitply it
+   by the id (point light source intensity) then mulitply that by
+   the lamberterm (the clamped dot product of N and Lm where N is
+   the normalized vNormal and Lm is the normalized lightDirection)
 */
 
 /*
