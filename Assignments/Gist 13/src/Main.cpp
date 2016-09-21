@@ -1,7 +1,8 @@
 /*
-Gist 13: answer the following questions and submit via gist by 930.
+Gist 13: answer the following questions and submit via gist by 9:30.
 
-1. What is the difference between a directional and point light
+1. What is the difference between a directional and point light?
+
 2. Which lighting model have you implemented?
 
 3. What are the equations for your model?
@@ -13,6 +14,30 @@ the shader pipeline.
 
 You can not use the Internet or code. You can use typed notes or 
 handwritten notes. If you do not know the answer then put a valid 
-reason for not understanding it and how someone could help you
+reason for not understanding it and how someone could help you.
 */
 
+/*
+1) Directional Light - travels globally in a set direction. The core of Directional Light is about direction.
+   Point Light - emits across a volume. The core of Point Light is about position.
+*/
+
+/*
+2) I have implemented the Point Light model.
+*/
+
+/*
+3) Ambient Equation - Ia * Ka * hemisphere
+   Diffuse Equation - Kd * lamberterm * Id
+   Specular Equation - Is * Ks * specularTerm
+*/
+
+/*
+4) I do not know how the Diffuse calculation is created.
+   
+*/
+
+/*
+5) Information from the application is delivered to the shader
+   pipeline by buffering and binding data. 
+*/
