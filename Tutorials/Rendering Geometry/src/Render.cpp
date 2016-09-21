@@ -125,6 +125,11 @@ void RenderingGeometry::createPlane()
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
+void RenderingGeometry::drawPlane()
+{
+
+}
+
 void RenderingGeometry::createCube()
 {
 	Vertex vertices[8];
@@ -168,6 +173,11 @@ void RenderingGeometry::createCube()
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+}
+
+void RenderingGeometry::drawCube()
+{
+
 }
 
 Vertex* RenderingGeometry::generateHalfSphereVertices(unsigned int np, const int &rad)
@@ -265,6 +275,11 @@ void RenderingGeometry::createSphere()
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+}
+
+void RenderingGeometry::drawSphere()
+{
+
 }
 
 bool RenderingGeometry::update()
