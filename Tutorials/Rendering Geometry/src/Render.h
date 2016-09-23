@@ -23,7 +23,7 @@ public:
 	Vertex* generateSphereVertices(const unsigned int &sides, const unsigned int &mirid, Vertex* &halfSphere);
 	unsigned int* generateSphereIndicies(const unsigned int &vertices, const unsigned int &mirid);
 	std::vector<unsigned int> indicesHolder;
-	void createSphere();
+	void createSphere(const int radius, const unsigned int verts, const unsigned int halfSpheres);
 	void drawSphere();
 private:
 	glm::mat4 m_projectionViewMatrix;
@@ -31,10 +31,6 @@ private:
 	glm::mat4 projection;
 	GLFWwindow* window;
 	unsigned int m_programID;
-	unsigned int m_VAO;
-	unsigned int m_VBO;
-	unsigned int m_IBO;
-	//
 	unsigned int p_VAO;
 	unsigned int p_VBO;
 	unsigned int p_IBO;
@@ -44,12 +40,8 @@ private:
 	unsigned int s_VAO;
 	unsigned int s_VBO;
 	unsigned int s_IBO;
-	//
-	int indicesCounter;
-	//
 	int p_indicesCounter;
 	int c_indicesCounter;
 	int s_indicesCounter;
-	//
 	float pi = 3.14159265359f;
 };
