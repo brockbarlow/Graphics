@@ -30,6 +30,8 @@ Textures::Textures()
 
 bool Textures::start()
 {
+
+
 	createPlane();
 	createCube();
 	createSphere(2, 30, 30);
