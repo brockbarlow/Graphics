@@ -19,13 +19,6 @@ public:
 	virtual void destroy() = 0;
 };
 
-struct Vertex
-{
-	glm::vec4 Position;
-	glm::vec4 color;
-	glm::vec2 TexCoord;
-};
-
 class Textures : public Application {
 public:
 	Textures();
@@ -35,15 +28,6 @@ public:
 	void destroy() override;
 	std::string ReadFromFile(std::string text);
 	void createPlane();
-	void drawPlane();
-	void createCube();
-	void drawCube();
-	Vertex* generateHalfSphereVertices(unsigned int np, const int &rad);
-	Vertex* generateSphereVertices(const unsigned int &sides, const unsigned int &mirid, Vertex* &halfSphere);
-	unsigned int* generateSphereIndicies(const unsigned int &vertices, const unsigned int &mirid);
-	std::vector<unsigned int> indicesHolder;
-	void createSphere(const int radius, const unsigned int verts, const unsigned int halfSpheres);
-	void drawSphere();
 private:
 	glm::mat4 m_projectionViewMatrix;
 	glm::mat4 view;
@@ -54,14 +38,5 @@ private:
 	unsigned int p_VAO;
 	unsigned int p_VBO;
 	unsigned int p_IBO;
-	unsigned int c_VAO;
-	unsigned int c_VBO;
-	unsigned int c_IBO;
-	unsigned int s_VAO;
-	unsigned int s_VBO;
-	unsigned int s_IBO;
 	int p_indicesCounter;
-	int c_indicesCounter;
-	int s_indicesCounter;
-	float pi = 3.14159265359f;
 };
