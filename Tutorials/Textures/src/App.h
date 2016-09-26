@@ -1,6 +1,4 @@
-//#pragma once
-#define STB_IMAGE_IMPLEMENTATION
-#include <stb_image.h>
+#pragma once
 #include <iostream>
 #include "gl_core_4_4.h"
 #include "Gizmos.h"
