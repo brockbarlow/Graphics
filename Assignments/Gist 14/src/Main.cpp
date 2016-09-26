@@ -47,17 +47,17 @@ struct Rectangle
 	float height; 
 };
 
-bool IsPointWithinDistOfRectangle(const Rectangle& rect, const Point& point, float dist)
+bool IsPointWithinDistOfRectangle(const Rectangle &rect, const Point &point, float dist)
 {
 	if (point.x <= (rect.bottomLeft.x + rect.width + dist) && point.x >= (rect.bottomLeft.x - dist))
 	{
 		if (point.y <= (rect.bottomLeft.y + rect.height + dist) && point.y >= (rect.bottomLeft.y - dist))
 		{
-			std::cout << "Point within dist of rectangle." << std::endl;
+			std::cout << "Point is within dist of rectangle.\n" << std::endl;
 			return true;
 		}
 	}
-	std::cout << "Error! Check failed." << std::endl;
+	std::cout << "Error! Point is not within dist of rectangle.\n" << std::endl;
 	return false;
 }
 
@@ -78,7 +78,24 @@ int main()
 
 	float dist = 5.0f;
 
-	IsPointWithinDistOfRectangle(p, p_test, dist);
+	IsPointWithinDistOfRectangle(r, p_test, dist); //PASSED. Point is within range.
+
+	/*This was to check if the function could fail.*/
+	/////////////////////////////////////////////////////////////////////////////////////
+	//p.x = 0.0f;
+	//p.y = 0.0f;
+	//
+	//p_test.x = 25.0f;
+	//p_test.y = 25.0f;
+	//
+	//r.bottomLeft = p;
+	//r.height = 10.0f;
+	//r.width = 10.0f;
+	//
+	//dist = 10.0f;
+	//
+	//IsPointWithinDistOfRectangle(r, p_test, dist); //PASSED. Point is not within range.
+	/////////////////////////////////////////////////////////////////////////////////////
 
 	system("pause");
 	return 0;
