@@ -30,11 +30,20 @@ Textures::Textures()
 
 bool Textures::start()
 {
+	int imageWidth = 0, imageHeight = 0, imageFormat = 0;
+	unsigned char* data = stbi_load("./data/textures/crate.png", &imageWidth, &imageHeight, &imageFormat, STBI_default);
 
+	glGenTextures(1, &m_texture);
+	glBindTexture(GL_TEXTURE_2D, m_texture);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, imageWidth, imageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
-	createPlane();
-	createCube();
-	createSphere(2, 30, 30);
+	stbi_image_free(data);
+
+	//createPlane();
+	//createCube();
+	//createSphere(2, 30, 30);
 
 	const char* vsSource;
 	std::string vs = ReadFromFile("vsInfo.txt");

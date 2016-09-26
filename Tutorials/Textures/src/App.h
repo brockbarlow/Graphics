@@ -50,6 +50,7 @@ private:
 	glm::mat4 projection;
 	GLFWwindow* window;
 	unsigned int m_programID;
+	unsigned int m_texture;
 	unsigned int p_VAO;
 	unsigned int p_VBO;
 	unsigned int p_IBO;
