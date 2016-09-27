@@ -66,17 +66,18 @@ int main()
 	smg.maxDamage = 15.0f;
 	smg.speed = 5.85f;
 
-	float temp_H = GetDPS(h);
-	float temp_S = GetDPS(s);
-	float temp_SR = GetDPS(sr);
-	float temp_F = GetDPS(f);
-	float temp_SMG = GetDPS(smg);
+	float temp_H = round(GetDPS(h) * 100) / 100;
+	float temp_S = round(GetDPS(s) * 100) / 100;
+	float temp_SR = round(GetDPS(sr) * 100) / 100;
+	float temp_F = round(GetDPS(f) * 100) / 100;
+	float temp_SMG = round(GetDPS(smg) * 100) / 100;
 
 	std::cout << "Handgun DPS is: " << temp_H << std::endl;
 	std::cout << "Shotgun DPS is: " << temp_S << std::endl;
 	std::cout << "Sniper Rigle DPS is: " << temp_SR << std::endl;
 	std::cout << "Fatman DPS is: " << temp_F << std::endl;
 	std::cout << "Sub Machinegun DPS is: " << temp_SMG << std::endl;
+	std::cout << std::endl;
 
 	system("pause");
 	return 0;
