@@ -43,8 +43,6 @@ bool Textures::start()
 
 	stbi_image_free(data);
 
-	createPlane();
-
 	const char* vsSource;
 	std::string vs = ReadFromFile("vsInfo.txt");
 	vsSource = vs.c_str();
