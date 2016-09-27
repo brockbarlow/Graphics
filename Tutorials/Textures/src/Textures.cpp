@@ -33,7 +33,7 @@ bool Textures::start()
 	createPlane();
 
 	int imageWidth = 0, imageHeight = 0, imageFormat = 0;
-	unsigned char* data = stbi_load("data/textures/crate.png", &imageWidth, &imageHeight, &imageFormat, STBI_default);
+	unsigned char* data = stbi_load("data/textures/crate.png", &imageWidth, &imageHeight, &imageFormat, STBI_rgb);
 
 	glGenTextures(1, &m_texture);
 	glBindTexture(GL_TEXTURE_2D, m_texture);
