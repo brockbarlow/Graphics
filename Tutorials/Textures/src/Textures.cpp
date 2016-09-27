@@ -6,7 +6,7 @@ Textures::Textures()
 {
 	glfwInit();
 
-	window = glfwCreateWindow(1280, 720, "Rendering Geometry", nullptr, nullptr);
+	window = glfwCreateWindow(1280, 720, "Textures", nullptr, nullptr);
 
 	if (window == nullptr)
 	{
@@ -32,20 +32,28 @@ bool Textures::start()
 {
 	createPlane();
 
-	int imageWidth = 0, imageHeight = 0, imageFormat = 0;                                             //STBI_rgb
-	                                                                                                  //STBI_default
+	int imageWidth = 0, imageHeight = 0, imageFormat = 0;                                             
+	                                                                                                  
 	unsigned char* data = stbi_load("data/textures/crate.png", &imageWidth, &imageHeight, &imageFormat, STBI_default);
 	glGenTextures(1, &m_texture);
 	glBindTexture(GL_TEXTURE_2D, m_texture);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB/*A*/, imageWidth, imageHeight, 0, GL_RGB/*A*/, GL_UNSIGNED_BYTE, data);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, imageWidth, imageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	stbi_image_free(data);
 
-	unsigned char* data2 = stbi_load("data/textures/crate.png", &imageWidth, &imageHeight, &imageFormat, STBI_default);
+	/*unsigned char* data2 = stbi_load("data/textures/crate.png", &imageWidth, &imageHeight, &imageFormat, STBI_default);
 	glGenTextures(1, &m_texture2);
 	glBindTexture(GL_TEXTURE_2D, m_texture2);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB/*A*/, imageWidth, imageHeight, 0, GL_RGB/*A*/, GL_UNSIGNED_BYTE, data2);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, imageWidth, imageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data2);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	stbi_image_free(data2);*/
+
+	unsigned char* data2 = stbi_load("data/textures/star.png", &imageWidth, &imageHeight, &imageFormat, STBI_default);
+	glGenTextures(1, &m_texture2);
+	glBindTexture(GL_TEXTURE_2D, m_texture2);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageWidth, imageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data2);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	stbi_image_free(data2);
