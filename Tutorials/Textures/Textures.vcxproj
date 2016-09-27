@@ -126,14 +126,17 @@
     <ClInclude Include="src\gl_core_4_4.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Advance.cpp" />
     <ClCompile Include="src\Gizmos.cpp" />
     <ClCompile Include="src\gl_core_4_4.c" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Textures.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="fsInfo.txt" />
-    <Text Include="vsInfo.txt" />
+    <Text Include="fsAdvanceInfo.txt" />
+    <Text Include="fsTextureInfo.txt" />
+    <Text Include="vsAdvanceInfo.txt" />
+    <Text Include="vsTextureInfo.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

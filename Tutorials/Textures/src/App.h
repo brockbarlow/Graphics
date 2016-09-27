@@ -41,3 +41,26 @@ private:
 	unsigned int p_IBO;
 	int p_indicesCounter;
 };
+
+class Advance : public Application {
+public:
+	Advance();
+	bool start() override;
+	bool update() override;
+	void draw() override;
+	void destroy() override;
+	std::string ReadFromFile(std::string text);
+	void createPlane();
+private:
+	glm::mat4 m_projectionViewMatrix;
+	glm::mat4 view;
+	glm::mat4 projection;
+	GLFWwindow* window;
+	unsigned int m_programID;
+	unsigned int m_texture;
+	unsigned int m_normalmap;
+	unsigned int p_VAO;
+	unsigned int p_VBO;
+	unsigned int p_IBO;
+	int p_indicesCounter;
+};

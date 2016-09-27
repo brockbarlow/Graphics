@@ -38,9 +38,14 @@
     <ClCompile Include="src\Textures.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Advance.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="vsInfo.txt" />
-    <Text Include="fsInfo.txt" />
+    <Text Include="fsAdvanceInfo.txt" />
+    <Text Include="vsTextureInfo.txt" />
+    <Text Include="vsAdvanceInfo.txt" />
+    <Text Include="fsTextureInfo.txt" />
   </ItemGroup>
 </Project>

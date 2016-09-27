@@ -59,11 +59,11 @@ bool Textures::start()
 	stbi_image_free(data2);
 
 	const char* vsSource;
-	std::string vs = ReadFromFile("vsInfo.txt");
+	std::string vs = ReadFromFile("vsTextureInfo.txt");
 	vsSource = vs.c_str();
 
 	const char* fsSource;
-	std::string fs = ReadFromFile("fsInfo.txt");
+	std::string fs = ReadFromFile("fsTextureInfo.txt");
 	fsSource = fs.c_str();
 
 	unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
