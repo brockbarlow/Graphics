@@ -32,16 +32,23 @@ bool Textures::start()
 {
 	createPlane();
 
-	int imageWidth = 0, imageHeight = 0, imageFormat = 0;
-	unsigned char* data = stbi_load("data/textures/crate.png", &imageWidth, &imageHeight, &imageFormat, STBI_rgb);
-
+	int imageWidth = 0, imageHeight = 0, imageFormat = 0;                                             //STBI_rgb
+	                                                                                                  //STBI_default
+	unsigned char* data = stbi_load("data/textures/crate.png", &imageWidth, &imageHeight, &imageFormat, STBI_default);
 	glGenTextures(1, &m_texture);
 	glBindTexture(GL_TEXTURE_2D, m_texture);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, imageWidth, imageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB/*A*/, imageWidth, imageHeight, 0, GL_RGB/*A*/, GL_UNSIGNED_BYTE, data);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
 	stbi_image_free(data);
+
+	unsigned char* data2 = stbi_load("data/textures/crate.png", &imageWidth, &imageHeight, &imageFormat, STBI_default);
+	glGenTextures(1, &m_texture2);
+	glBindTexture(GL_TEXTURE_2D, m_texture2);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB/*A*/, imageWidth, imageHeight, 0, GL_RGB/*A*/, GL_UNSIGNED_BYTE, data2);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	stbi_image_free(data2);
 
 	const char* vsSource;
 	std::string vs = ReadFromFile("vsInfo.txt");
@@ -51,7 +58,6 @@ bool Textures::start()
 	std::string fs = ReadFromFile("fsInfo.txt");
 	fsSource = fs.c_str();
 
-	int success = GL_FALSE;
 	unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
 	unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 
@@ -65,8 +71,8 @@ bool Textures::start()
 	glAttachShader(m_programID, fragmentShader);
 	glLinkProgram(m_programID);
 
-	glDeleteShader(fragmentShader);
 	glDeleteShader(vertexShader);
+	glDeleteShader(fragmentShader);
 
 	return true;
 }
@@ -87,14 +93,24 @@ void Textures::draw()
 	glUseProgram(m_programID);
 
 	m_projectionViewMatrix = projection * view;
+
 	int loc = glGetUniformLocation(m_programID, "ProjectionView");
 	glUniformMatrix4fv(loc, 1, GL_FALSE, glm::value_ptr(m_projectionViewMatrix));
+
+	int loc2 = glGetUniformLocation(m_programID, "ProjectionView");
+	glUniformMatrix4fv(loc2, 1, GL_FALSE, glm::value_ptr(m_projectionViewMatrix));
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, m_texture);
 
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, m_texture2);
+
 	loc = glGetUniformLocation(m_programID, "diffuse");
 	glUniform1i(loc, 0);
+
+	loc2 = glGetUniformLocation(m_programID, "white");
+	glUniform1i(loc2, 1);
 
 	glBindVertexArray(p_VAO);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);

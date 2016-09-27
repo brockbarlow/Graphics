@@ -35,6 +35,7 @@ private:
 	GLFWwindow* window;
 	unsigned int m_programID;
 	unsigned int m_texture;
+	unsigned int m_texture2;
 	unsigned int p_VAO;
 	unsigned int p_VBO;
 	unsigned int p_IBO;
