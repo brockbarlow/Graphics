@@ -19,6 +19,13 @@ public:
 	virtual void destroy() = 0;
 };
 
+struct Vertex {
+	float x, y, z, w;
+	float nx, ny, nz, nw;
+	float tx, ty, tz, tw;
+	float s, t;
+};
+
 class Textures : public Application {
 public:
 	Textures();
@@ -28,36 +35,7 @@ public:
 	void destroy() override;
 	std::string ReadFromFile(std::string text);
 	void createPlane();
-private:
-	glm::mat4 m_projectionViewMatrix;
-	glm::mat4 view;
-	glm::mat4 projection;
-	GLFWwindow* window;
-	unsigned int m_programID;
-	unsigned int m_texture;
-	unsigned int m_texture2;
-	unsigned int p_VAO;
-	unsigned int p_VBO;
-	unsigned int p_IBO;
-	int p_indicesCounter;
-};
-
-struct Vertex {
-	float x, y, z, w;
-	float nx, ny, nz, nw;
-	float tx, ty, tz, tw;
-	float s, t;
-};
-
-class Advance : public Application {
-public:
-	Advance();
-	bool start() override;
-	bool update() override;
-	void draw() override;
-	void destroy() override;
-	std::string ReadFromFile(std::string text);
-	void createPlane();
+	void createData();
 private:
 	glm::mat4 m_projectionViewMatrix;
 	glm::mat4 view;
@@ -66,8 +44,9 @@ private:
 	unsigned int m_programID;
 	unsigned int m_texture;
 	unsigned int m_normal;
-	unsigned int p_VAO;
-	unsigned int p_VBO;
-	unsigned int p_IBO;
-	int p_indicesCounter;
+	//unsigned int m_texture2;
+	unsigned int m_VAO;
+	unsigned int m_VBO;
+	unsigned int m_IBO;
+	int m_indicesCounter;
 };
