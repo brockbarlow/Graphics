@@ -9,6 +9,7 @@
 #include <string>
 #include <vector>
 #include <math.h>
+#include <FBXFile.h>
 
 class Application
 {
@@ -36,11 +37,13 @@ public:
 	std::string ReadFromFile(std::string text);
 	void createPlane();
 	void createData();
+	void createOpenGLBuffers(FBXFile* fbx);
 private:
 	glm::mat4 m_projectionViewMatrix;
 	glm::mat4 view;
 	glm::mat4 projection;
 	GLFWwindow* window;
+	FBXFile* m_fbx;
 	unsigned int m_programID;
 	unsigned int m_texture;
 	unsigned int m_normal;
@@ -48,5 +51,4 @@ private:
 	unsigned int m_VAO;
 	unsigned int m_VBO;
 	unsigned int m_IBO;
-	int m_indicesCounter;
 };
