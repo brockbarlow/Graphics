@@ -69,8 +69,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)dep\stb;$(SolutionDir)dep\glm;$(SolutionDir)dep\glfw\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)dep\glfw\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)dep\gizmos;$(SolutionDir)dep\fbxloader\include;$(SolutionDir)dep\glcore;$(SolutionDir)dep\stb;$(SolutionDir)dep\glm;$(SolutionDir)dep\glfw\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)dep\fbxloader\lib;$(SolutionDir)dep\glfw\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(SolutionDir)dep\glcore;$(SolutionDir)dep\gizmos;$(SolutionDir)dep\fbxloader\include;$(SolutionDir)dep\stb;$(SolutionDir)dep\glm;$(SolutionDir)dep\glfw\include;$(IncludePath)</IncludePath>
