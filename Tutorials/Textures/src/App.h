@@ -42,6 +42,13 @@ private:
 	int p_indicesCounter;
 };
 
+struct Vertex {
+	float x, y, z, w;
+	float nx, ny, nz, nw;
+	float tx, ty, tz, tw;
+	float s, t;
+};
+
 class Advance : public Application {
 public:
 	Advance();
@@ -58,7 +65,7 @@ private:
 	GLFWwindow* window;
 	unsigned int m_programID;
 	unsigned int m_texture;
-	unsigned int m_normalmap;
+	unsigned int m_normal;
 	unsigned int p_VAO;
 	unsigned int p_VBO;
 	unsigned int p_IBO;

@@ -43,9 +43,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="fsAdvanceInfo.txt" />
     <Text Include="vsTextureInfo.txt" />
-    <Text Include="vsAdvanceInfo.txt" />
     <Text Include="fsTextureInfo.txt" />
+    <Text Include="fsAdvanceInfo.txt" />
+    <Text Include="vsAdvanceInfo.txt" />
   </ItemGroup>
 </Project>
