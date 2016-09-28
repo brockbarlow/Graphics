@@ -126,6 +126,7 @@
     <ClInclude Include="src\gl_core_4_4.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Advance.cpp" />
     <ClCompile Include="src\Gizmos.cpp" />
     <ClCompile Include="src\gl_core_4_4.c" />
     <ClCompile Include="src\Main.cpp" />

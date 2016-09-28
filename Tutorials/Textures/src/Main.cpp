@@ -2,7 +2,7 @@
 
 int main()
 {
-	Application* application = new Textures/*Advance*/();
+	Application* application = new Textures();
 
 	if (application->start() == true)
 	{
