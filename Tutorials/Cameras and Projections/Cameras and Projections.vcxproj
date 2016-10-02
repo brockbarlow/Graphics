@@ -77,7 +77,7 @@
     <LibraryPath>$(SolutionDir)dep\glfw\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)dep\glm;$(SolutionDir)dep\glfw\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)dep\gizmos;$(SolutionDir)dep\glcore;$(SolutionDir)dep\glm;$(SolutionDir)dep\glfw\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)dep\glfw\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -133,7 +133,6 @@
     <ClCompile Include="src\Gizmos.cpp" />
     <ClCompile Include="src\gl_core_4_4.c" />
     <ClCompile Include="src\Main.cpp" />
-    <ClCompile Include="src\MainCamera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\App.h" />
