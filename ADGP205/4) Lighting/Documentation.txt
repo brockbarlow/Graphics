@@ -1,6 +1,6 @@
 ﻿Brock Barlow
 ID #1113
-Assessment Graphics
+Assessment ADGP 205 - Graphics
 
 
 Graphics Assessment Documentation for “OpenGL Lighting”
