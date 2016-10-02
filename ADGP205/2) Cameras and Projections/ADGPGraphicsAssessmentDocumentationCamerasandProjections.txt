@@ -1,0 +1,14 @@
+﻿Brock Barlow
+ID #1113
+Assessment Graphics
+
+
+Graphics Assessment Documentation for “Cameras and Projections”
+
+
+Purpose:
+Introduce the steps needed to create our own moveable camera that allows us to move around our rendered objects.
+
+
+Learning Outcomes:
+Learn how to create a camera class that uses matrix math to translate, rotate, and scale about it’s origin.

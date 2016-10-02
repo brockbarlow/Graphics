@@ -1,0 +1,16 @@
+﻿Brock Barlow
+ID #1113
+Assessment Graphics
+
+
+Graphics Assessment Documentation for “Intro to OpenGL”
+
+
+Purpose:
+Introduce the steps needed to create our own OpenGL projects that allow us to experiment with modern OpenGL rendering techniques.
+
+
+Learning Outcomes:
+Learn how to setup the GLFW and OpenGL libraries, linking them in Visual Studios using the environment variable $(SolutionDir).
+Learn how to use inheritance: OOP design involving a base class and classes that will inherit from this base class.
+Learn how to setup and use virtual functions.
