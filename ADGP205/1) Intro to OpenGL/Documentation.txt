@@ -1,0 +1,22 @@
+﻿Brock Barlow
+ID #1113
+Assessment ADGP 205 - Graphics
+
+
+Graphics Assessment Documentation for “Intro to OpenGL”
+
+
+Purpose:
+Introduce the steps needed to create our own OpenGL projects that allow us to experiment with modern OpenGL rendering techniques.
+
+
+Learning Outcomes:
+1. Learn how to setup the GLFW and OpenGL libraries, linking them in Visual Studios using the environment variable $(SolutionDir).
+2. Learn how to use inheritance: OOP design involving a base class and classes that will inherit from this base class.
+3. Learn how to setup and use virtual functions.
+
+
+Learning Outcomes that were performed:
+1. GLFW, glm, gl_core_4_4, and gizmos were included into the project through the properties window.
+2. Project has a base Application class the gets inherited by the Solar System class.
+3. The base Application class has four virtual functions: start, update, draw, and end. The Solar System class overrides these four virtual functions.
