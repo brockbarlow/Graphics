@@ -10,7 +10,6 @@
 #include <vector>
 #include <gtx\transform.hpp>
 #include <gtc\matrix_transform.hpp>
-#include <stb_image.h>
 
 class Application
 {
@@ -36,9 +35,16 @@ public:
 	void draw() override;
 	void destroy() override;
 	std::string ReadFromFile(std::string text);
+	void createPlane();
+	void drawPlane();
 private:
 	glm::mat4 m_projectionViewMatrix;
 	glm::mat4 view;
 	glm::mat4 projection;
 	GLFWwindow* window;
+	unsigned int m_programID;
+	unsigned int m_VAO;
+	unsigned int m_VBO;
+	unsigned int m_IBO;
+	int m_indicesCounter;
 };
