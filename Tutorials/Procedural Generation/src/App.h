@@ -8,6 +8,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <math.h>
 #include <gtx\transform.hpp>
 #include <gtc\matrix_transform.hpp>
 
@@ -35,16 +36,22 @@ public:
 	void draw() override;
 	void destroy() override;
 	std::string ReadFromFile(std::string text);
-	void createPlane();
+	float* generatePerlin(const int &dims);
+	bool createPlane(const int &width, const int &height);
 	void drawPlane();
 private:
 	glm::mat4 m_projectionViewMatrix;
 	glm::mat4 view;
 	glm::mat4 projection;
 	GLFWwindow* window;
+	unsigned int m_projectionViewUniform;
 	unsigned int m_programID;
+	unsigned int m_texture;
+	/*unsigned int m_grass;
+	unsigned int m_rocks;
+	unsigned int m_gravel;*/
 	unsigned int m_VAO;
 	unsigned int m_VBO;
 	unsigned int m_IBO;
-	int m_indicesCounter;
+	int m_indexCounter;
 };
