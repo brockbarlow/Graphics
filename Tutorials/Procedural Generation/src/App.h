@@ -37,7 +37,7 @@ public:
 	void draw() override;
 	void destroy() override;
 	std::string ReadFromFile(std::string text);
-	float* generatePerlin();
+	float* generatePerlin(const int &dims);
 	void createPlane(const int &width, const int &height);
 private:
 	glm::mat4 m_projectionViewMatrix;

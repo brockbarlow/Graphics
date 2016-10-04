@@ -30,22 +30,33 @@ ProceduralGeneration::ProceduralGeneration()
 
 bool ProceduralGeneration::start()
 {
-	int imageWidth = 0, imageHeight = 0, imageFormat = 0;
-	unsigned char* data;
+	int dims = 25;
+	float* perlin_data = generatePerlin(dims);
 
-	float* perlin_data = generatePerlin();
+	int imageWidth = dims, imageHeight = dims, imageFormat = 0;
+
 	glGenTextures(1, &m_texture);
 	glBindTexture(GL_TEXTURE_2D, m_texture);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_R32F, 25, 25, 0, GL_RED, GL_FLOAT, perlin_data);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_R32F, imageWidth, imageHeight, 0, GL_RED, GL_FLOAT, perlin_data);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	stbi_image_free(perlin_data);
 
+	unsigned char* data;
+
 	data = stbi_load("data/textures/rocky_ground.tga", &imageWidth, &imageHeight, &imageFormat, STBI_default);
 	glGenTextures(1, &m_rocks);
 	glBindTexture(GL_TEXTURE_2D, m_rocks);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, imageWidth, imageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	stbi_image_free(data);
+
+	data = stbi_load("data/textures/dirt_grass.tga", &imageWidth, &imageHeight, &imageFormat, STBI_default);
+	glGenTextures(1, &m_grass);
+	glBindTexture(GL_TEXTURE_2D, m_grass);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, imageWidth, imageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -85,7 +96,7 @@ bool ProceduralGeneration::start()
 		delete[] infoLog;
 	}
 
-	createPlane(25, 25);
+	createPlane(dims, dims);
 
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
@@ -119,11 +130,17 @@ void ProceduralGeneration::draw()
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, m_rocks);
 
+	glActiveTexture(GL_TEXTURE2);
+	glBindTexture(GL_TEXTURE_2D, m_grass);
+
 	loc = glGetUniformLocation(m_programID, "perlin_texture");
 	glUniform1i(loc, 0);
 
-	loc = glGetUniformLocation(m_programID, "otherTexture");
+	loc = glGetUniformLocation(m_programID, "rocky_texture");
 	glUniform1i(loc, 1);
+
+	loc = glGetUniformLocation(m_programID, "grass_texture");
+	glUniform1i(loc, 2);
 
 	glBindVertexArray(m_VAO);
 	glDrawElements(GL_TRIANGLES, m_indexCounter, GL_UNSIGNED_INT, nullptr);
@@ -156,9 +173,8 @@ std::string ProceduralGeneration::ReadFromFile(std::string text)
 	return container;
 }
 
-float* ProceduralGeneration::generatePerlin()
+float* ProceduralGeneration::generatePerlin(const int &dims)
 {
-	int dims = 25;
 	float* perlin_data = new float[dims * dims];
 	float scale = (1.0f / dims) * 3;
 	int octaves = 6;
