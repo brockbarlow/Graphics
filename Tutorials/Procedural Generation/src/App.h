@@ -12,6 +12,7 @@
 #include <gtx\transform.hpp>
 #include <gtc\matrix_transform.hpp>
 #include <FBXFile.h>
+#include "Camera.h"
 
 class Application
 {
