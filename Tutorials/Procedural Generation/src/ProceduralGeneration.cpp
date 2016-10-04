@@ -63,6 +63,14 @@ bool ProceduralGeneration::start()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	stbi_image_free(data);
 
+	data = stbi_load("data/textures/gravel.tga", &imageWidth, &imageHeight, &imageFormat, STBI_default);
+	glGenTextures(1, &m_gravel);
+	glBindTexture(GL_TEXTURE_2D, m_gravel);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, imageWidth, imageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	stbi_image_free(data);
+
 	const char* vsSource;
 	std::string vs = ReadFromFile("vsTextureInfo.txt");
 	vsSource = vs.c_str();
@@ -136,6 +144,9 @@ void ProceduralGeneration::draw()
 	glActiveTexture(GL_TEXTURE2);
 	glBindTexture(GL_TEXTURE_2D, m_grass);
 
+	glActiveTexture(GL_TEXTURE2);
+	glBindTexture(GL_TEXTURE_2D, m_gravel);
+
 	loc = glGetUniformLocation(m_programID, "perlin_texture");
 	glUniform1i(loc, 0);
 
@@ -144,6 +155,9 @@ void ProceduralGeneration::draw()
 
 	loc = glGetUniformLocation(m_programID, "grass_texture");
 	glUniform1i(loc, 2);
+
+	loc = glGetUniformLocation(m_programID, "gravel_texture");
+	glUniform1i(loc, 3);
 
 	glBindVertexArray(m_VAO);
 	glDrawElements(GL_TRIANGLES, m_indexCounter, GL_UNSIGNED_INT, nullptr);

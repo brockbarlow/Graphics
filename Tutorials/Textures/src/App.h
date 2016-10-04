@@ -10,6 +10,7 @@
 #include <vector>
 #include <math.h>
 #include <FBXFile.h>
+#include "Camera.h"
 
 class Application
 {
@@ -39,16 +40,16 @@ public:
 	void createData();
 	void createOpenGLBuffers(FBXFile* fbx);
 private:
-	glm::mat4 m_projectionViewMatrix;
-	glm::mat4 view;
-	glm::mat4 projection;
 	GLFWwindow* window;
+	FlyCamera myCamera;
 	FBXFile* m_fbx;
 	unsigned int m_programID;
 	unsigned int m_texture;
 	unsigned int m_normal;
-	//unsigned int m_texture2;
 	unsigned int m_VAO;
 	unsigned int m_VBO;
 	unsigned int m_IBO;
+	float previous = 0;
+	float current;
+	float delta;
 };
