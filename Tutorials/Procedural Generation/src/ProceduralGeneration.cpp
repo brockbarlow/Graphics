@@ -20,8 +20,9 @@ ProceduralGeneration::ProceduralGeneration()
 		glfwTerminate();
 	}
 
-	view = glm::lookAt(glm::vec3(20, 20, 20), glm::vec3(0), glm::vec3(0, 1, 0));
-	projection = glm::perspective(glm::pi<float>() * 0.25f, 16 / 9.f, 0.1f, 1000.f);
+	myCamera.setLookAt(glm::vec3(20, 20, 20), glm::vec3(0), glm::vec3(0, 1, 0));
+	myCamera.setPerspective(glm::pi<float>() * 0.25f, 16 / 9.f, 0.1f, 1000.f);
+	myCamera.setSpeed(10);
 
 	glEnable(GL_BLEND);
 	glClearColor(0.25f, 0.25f, 0.25f, 1);
@@ -106,6 +107,10 @@ bool ProceduralGeneration::start()
 
 bool ProceduralGeneration::update()
 {
+	current = (float)glfwGetTime();
+	delta = current - previous;
+	previous = current;
+
 	while (glfwWindowShouldClose(window) == false && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -119,10 +124,8 @@ void ProceduralGeneration::draw()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glUseProgram(m_programID);
 
-	m_projectionViewMatrix = projection * view;
-
 	int loc = glGetUniformLocation(m_programID, "view_proj");
-	glUniformMatrix4fv(loc, 1, GL_FALSE, glm::value_ptr(m_projectionViewMatrix));
+	glUniformMatrix4fv(loc, 1, GL_FALSE, &(myCamera.getProjectionView()[0][0]));
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, m_texture);
@@ -145,6 +148,8 @@ void ProceduralGeneration::draw()
 	glBindVertexArray(m_VAO);
 	glDrawElements(GL_TRIANGLES, m_indexCounter, GL_UNSIGNED_INT, nullptr);
 	glBindVertexArray(0);
+
+	myCamera.update(delta, window);
 
 	glfwSwapBuffers(window);
 	glfwPollEvents();

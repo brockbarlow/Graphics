@@ -41,10 +41,8 @@ public:
 	float* generatePerlin(const int &dims);
 	void createPlane(const int &width, const int &height);
 private:
-	glm::mat4 m_projectionViewMatrix;
-	glm::mat4 view;
-	glm::mat4 projection;
 	GLFWwindow* window;
+	FlyCamera myCamera;
 	unsigned int m_programID;
 	unsigned int m_texture;
 	unsigned int m_rocks;
@@ -53,4 +51,7 @@ private:
 	unsigned int m_VBO;
 	unsigned int m_IBO;
 	int m_indexCounter;
+	float previous = 0;
+	float current;
+	float delta;
 };
