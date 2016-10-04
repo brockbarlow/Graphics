@@ -19,8 +19,9 @@ RenderingGeometry::RenderingGeometry()
 		glfwTerminate();
 	}
 
-	view = glm::lookAt(glm::vec3(15, 15, 15), glm::vec3(0), glm::vec3(0, 1, 0));
-	projection = glm::perspective(glm::pi<float>() * 0.25f, 16 / 9.f, 0.1f, 1000.f);
+	myCamera.setLookAt(glm::vec3(15, 15, 15), glm::vec3(0), glm::vec3(0, 1, 0));
+	myCamera.setPerspective(glm::pi<float>() * 0.25f, 16 / 9.f, 0.1f, 1000.f);
+	myCamera.setSpeed(10);
 
 	glClearColor(0.25f, 0.25f, 0.25f, 1);
 	glEnable(GL_DEPTH_TEST);
@@ -65,10 +66,49 @@ bool RenderingGeometry::start()
 		printf("%s\n", infoLog);
 		delete[] infoLog;
 	}
-	glDeleteShader(fragmentShader);
-	glDeleteShader(vertexShader);
 	
+	glDeleteShader(vertexShader);
+	glDeleteShader(fragmentShader);
+
 	return true;
+}
+
+bool RenderingGeometry::update()
+{
+	current = (float)glfwGetTime();
+	delta = current - previous;
+	previous = current;
+
+	while (glfwWindowShouldClose(window) == false && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
+	{
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		return true;
+	}
+	return false;
+}
+
+void RenderingGeometry::draw()
+{
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glUseProgram(m_programID);
+
+	unsigned int projectionViewUniform = glGetUniformLocation(m_programID, "projectionViewWorldMatrix");
+	glUniformMatrix4fv(projectionViewUniform, 1, false, &(myCamera.getProjectionView()[0][0]));
+
+	drawPlane();
+	drawCube();
+	drawSphere();
+
+	myCamera.update(delta, window);
+
+	glfwSwapBuffers(window);
+	glfwPollEvents();
+}
+
+void RenderingGeometry::destroy()
+{
+	glfwDestroyWindow(window);
+	glfwTerminate();
 }
 
 std::string RenderingGeometry::ReadFromFile(std::string text)
@@ -274,37 +314,4 @@ void RenderingGeometry::drawSphere()
 {
 	glBindVertexArray(s_VAO);
 	glDrawElements(GL_TRIANGLE_STRIP, s_indicesCounter, GL_UNSIGNED_INT, 0);
-}
-
-bool RenderingGeometry::update()
-{
-	while (glfwWindowShouldClose(window) == false && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
-	{
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		return true;
-	}
-	return false;
-}
-
-void RenderingGeometry::draw()
-{
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glUseProgram(m_programID);
-
-	unsigned int projectionViewUniform = glGetUniformLocation(m_programID, "projectionViewWorldMatrix");
-	m_projectionViewMatrix = projection * view;
-	glUniformMatrix4fv(projectionViewUniform, 1, false,	glm::value_ptr(m_projectionViewMatrix));
-
-	drawPlane();
-	drawCube();
-	drawSphere();
-
-	glfwSwapBuffers(window);
-	glfwPollEvents();
-}
-
-void RenderingGeometry::destroy()
-{
-	glfwDestroyWindow(window);
-	glfwTerminate();
 }

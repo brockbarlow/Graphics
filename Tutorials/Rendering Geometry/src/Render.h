@@ -1,5 +1,6 @@
 #pragma once
 #include "App.h"
+#include "Camera.h"
 
 struct Vertex
 {
@@ -26,10 +27,8 @@ public:
 	void createSphere(const int radius, const unsigned int verts, const unsigned int halfSpheres);
 	void drawSphere();
 private:
-	glm::mat4 m_projectionViewMatrix;
-	glm::mat4 view;
-	glm::mat4 projection;
 	GLFWwindow* window;
+	FlyCamera myCamera;
 	unsigned int m_programID;
 	unsigned int p_VAO;
 	unsigned int p_VBO;
@@ -44,4 +43,7 @@ private:
 	int c_indicesCounter;
 	int s_indicesCounter;
 	float pi = 3.14159265359f;
+	float previous = 0;
+	float current;
+	float delta;
 };
