@@ -54,7 +54,8 @@ void FlyCamera::update(float deltaTime, GLFWwindow* window)
 {
 	glm::vec3 moveBy = glm::vec3(0);			
 	glm::mat4 rotateBy = glm::mat4(1);				
-	double x, y;
+	double x;
+	double y;
 	glfwGetCursorPos(window, &x, &y);
 	double Xoffset;
 	double Yoffset;
