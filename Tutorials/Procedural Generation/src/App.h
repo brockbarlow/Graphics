@@ -47,6 +47,7 @@ private:
 	unsigned int m_programID;
 	unsigned int m_texture;
 	unsigned int m_rocks;
+	unsigned int m_grass;
 	unsigned int m_VAO;
 	unsigned int m_VBO;
 	unsigned int m_IBO;

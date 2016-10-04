@@ -199,11 +199,11 @@ void ProceduralGeneration::createPlane(const int &width, const int &height)
 	unsigned int index = 0;
 	for (int r = 0; r < (width - 1); ++r) {
 		for (int c = 0; c < (height - 1); ++c) {
-			//t1
+			//triangle 1
 			indices[index++] = r * height + c;
 			indices[index++] = (r + 1) * height + c;
 			indices[index++] = (r + 1) * height + (c + 1);
-			//t2
+			//triangle 2
 			indices[index++] = r * height + c;
 			indices[index++] = (r + 1) * height + (c + 1);
 			indices[index++] = r * height + (c + 1);
