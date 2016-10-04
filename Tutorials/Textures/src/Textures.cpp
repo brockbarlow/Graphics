@@ -20,8 +20,9 @@ Textures::Textures()
 		glfwTerminate();
 	}
 
-	view = glm::lookAt(glm::vec3(15, 15, 15), glm::vec3(0), glm::vec3(0, 1, 0));
-	projection = glm::perspective(glm::pi<float>() * 0.25f, 16 / 9.f, 0.1f, 1000.f);
+	myCamera.setLookAt(glm::vec3(15, 15, 15), glm::vec3(0), glm::vec3(0, 1, 0));
+	myCamera.setPerspective(glm::pi<float>() * 0.25f, 16 / 9.f, 0.1f, 1000.f);
+	myCamera.setSpeed(10);
 
 	glEnable(GL_BLEND);
 	glClearColor(0.25f, 0.25f, 0.25f, 1);
@@ -30,7 +31,6 @@ Textures::Textures()
 
 bool Textures::start()
 {
-	//createPlane();
 	createData();
 
 	m_fbx = new FBXFile();
@@ -57,45 +57,13 @@ bool Textures::start()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	stbi_image_free(data);
 
-	/*data = stbi_load("data/textures/crate.png", &imageWidth, &imageHeight, &imageFormat, STBI_default);
-	glGenTextures(1, &m_texture);
-	glBindTexture(GL_TEXTURE_2D, m_texture);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, imageWidth, imageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	stbi_image_free(data);*/
-
-	/*unsigned char* data2 = stbi_load("data/textures/crate.png", &imageWidth, &imageHeight, &imageFormat, STBI_default);
-	glGenTextures(1, &m_texture2);
-	glBindTexture(GL_TEXTURE_2D, m_texture2);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, imageWidth, imageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data2);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	stbi_image_free(data2);*/
-
-	/*unsigned char* data2 = stbi_load("data/textures/star.png", &imageWidth, &imageHeight, &imageFormat, STBI_default);
-	glGenTextures(1, &m_texture2);
-	glBindTexture(GL_TEXTURE_2D, m_texture2);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageWidth, imageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data2);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	stbi_image_free(data2);*/
-
 	const char* vsSource;
 	std::string vs = ReadFromFile("vsAdvanceInfo.txt");
 	vsSource = vs.c_str();
 
-	/*const char* vsSource;
-	std::string vs = ReadFromFile("vsTextureInfo.txt");
-	vsSource = vs.c_str();*/
-
 	const char* fsSource;
 	std::string fs = ReadFromFile("fsAdvanceInfo.txt");
 	fsSource = fs.c_str();
-
-	/*const char* fsSource;
-	std::string fs = ReadFromFile("fsTextureInfo.txt");
-	fsSource = fs.c_str();*/
 
 	unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
 	unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
@@ -118,6 +86,10 @@ bool Textures::start()
 
 bool Textures::update()
 {
+	current = (float)glfwGetTime();
+	delta = current - previous;
+	previous = current;
+
 	while (glfwWindowShouldClose(window) == false && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -131,13 +103,8 @@ void Textures::draw()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glUseProgram(m_programID);
 
-	m_projectionViewMatrix = projection * view;
-
 	int loc = glGetUniformLocation(m_programID, "ProjectionView");
-	glUniformMatrix4fv(loc, 1, GL_FALSE, glm::value_ptr(m_projectionViewMatrix));
-
-	/*int loc2 = glGetUniformLocation(m_programID, "ProjectionView");
-	glUniformMatrix4fv(loc2, 1, GL_FALSE, glm::value_ptr(m_projectionViewMatrix));*/
+	glUniformMatrix4fv(loc, 1, GL_FALSE, &(myCamera.getProjectionView()[0][0]));
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, m_texture);
@@ -145,17 +112,11 @@ void Textures::draw()
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, m_normal);
 
-	/*glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, m_texture2);*/
-
 	loc = glGetUniformLocation(m_programID, "diffuse");
 	glUniform1i(loc, 0);
 
 	loc = glGetUniformLocation(m_programID, "normal");
 	glUniform1i(loc, 1);
-
-	/*loc2 = glGetUniformLocation(m_programID, "white");
-	glUniform1i(loc2, 1);*/
 
 	glm::vec3 lightAD(sin(glfwGetTime()), 1, cos(glfwGetTime()));
 	loc = glGetUniformLocation(m_programID, "LightDir");
@@ -173,6 +134,8 @@ void Textures::draw()
 
 	glBindVertexArray(m_VAO);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+
+	myCamera.update(delta, window);
 
 	glfwSwapBuffers(window);
 	glfwPollEvents();
@@ -199,40 +162,6 @@ std::string Textures::ReadFromFile(std::string text)
 		file.close();
 	}
 	return container;
-}
-
-void Textures::createPlane()
-{
-	float vertexData[] = {
-		-5, 0, 5, 1, 0, 1,
-		5, 0, 5, 1, 1, 1,
-		5, 0, -5, 1, 1, 0,
-		-5, 0, -5, 1, 0, 0,
-	};
-
-	unsigned int indexData[] = {
-		0, 1, 2,
-		0, 2, 3,
-	};
-
-	glGenVertexArrays(1, &m_VAO);
-	glBindVertexArray(m_VAO);
-
-	glGenBuffers(1, &m_VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, vertexData, GL_STATIC_DRAW);
-
-	glGenBuffers(1, &m_IBO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * 6, indexData, GL_STATIC_DRAW);
-
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, sizeof(float) * 6, 0);
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 6, ((char*)0) + 16);
-	glBindVertexArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
 void Textures::createData()
