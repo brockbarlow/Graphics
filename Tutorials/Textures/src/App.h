@@ -36,7 +36,6 @@ public:
 	void draw() override;
 	void destroy() override;
 	std::string ReadFromFile(std::string text);
-	void createPlane();
 	void createData();
 	void createOpenGLBuffers(FBXFile* fbx);
 private:
