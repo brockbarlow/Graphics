@@ -79,6 +79,9 @@ bool RenderingGeometry::update()
 	delta = current - previous;
 	previous = current;
 
+	glEnable(GL_PRIMITIVE_RESTART);
+	glPrimitiveRestartIndex(0xFFFF);
+
 	while (glfwWindowShouldClose(window) == false && glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -228,8 +231,8 @@ Vertex* RenderingGeometry::generateHalfSphereVertices(unsigned int np, const int
 
 	for (int i = 0; i < np; i++)
 	{
-		float angle = pi * i / (np - 1);
-		vertices[i].position = glm::vec4(rad * cos(angle), rad * sin(angle), 0, 1);
+		float angle = (pi * i) / (np - 1);
+		vertices[i].position = glm::vec4(rad * std::cos(angle), rad * std::sin(angle), 0, 1);
 	}
 	return vertices;
 }
@@ -241,12 +244,12 @@ Vertex* RenderingGeometry::generateSphereVertices(const unsigned int &sides, con
 
 	for (int i = 0; i < mirid; i++)
 	{
-		float phi = 2.f * pi * ((float)i / (float)(mirid));
+		float phi = (2.0f * pi) * ((float)i / (float)(mirid));
 		for (int j = 0; j < sides; j++, count++)
 		{
 			float x = halfSphere[j].position.x;
-			float y = halfSphere[j].position.y * cos(phi) - halfSphere[j].position.z * sin(phi);
-			float z = halfSphere[j].position.z * cos(phi) + halfSphere[j].position.y * sin(phi);
+			float y = halfSphere[j].position.y * std::cos(phi) - halfSphere[j].position.z * std::sin(phi);
+			float z = halfSphere[j].position.z * std::cos(phi) + halfSphere[j].position.y * std::sin(phi);
 			
 			vertices[count].position = glm::vec4(x, y, z, 1);
 			vertices[count].color = glm::vec4(1, 0, 0, 1);
@@ -312,6 +315,7 @@ void RenderingGeometry::createSphere(const int radius, const unsigned int verts,
 
 void RenderingGeometry::drawSphere()
 {
+	
 	glBindVertexArray(s_VAO);
 	glDrawElements(GL_TRIANGLE_STRIP, s_indicesCounter, GL_UNSIGNED_INT, 0);
 }
