@@ -144,7 +144,7 @@ void ProceduralGeneration::draw()
 	glActiveTexture(GL_TEXTURE2);
 	glBindTexture(GL_TEXTURE_2D, m_grass);
 
-	glActiveTexture(GL_TEXTURE2);
+	glActiveTexture(GL_TEXTURE3);
 	glBindTexture(GL_TEXTURE_2D, m_gravel);
 
 	loc = glGetUniformLocation(m_programID, "perlin_texture");
