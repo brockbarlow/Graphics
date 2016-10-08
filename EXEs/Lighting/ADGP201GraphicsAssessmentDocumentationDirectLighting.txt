@@ -1,0 +1,65 @@
+﻿Brock Barlow
+ID #1113
+Assessment ADGP 201 - Graphics
+
+
+Graphics Assessment Documentation for “Direct Lighting”
+
+
+Purpose:
+Introduce the steps needed to implement diffuse, ambient and specular lighting and understand the different between phong and blinn-phong models.
+
+
+Learning Outcomes:
+1. Diffuse implementation with pictures/documentation.
+2. Ambient implementation with pictures/documentation.
+3. Specular implementation with pictures/documentation.
+4. Understand difference between blinn-phong and phong.
+
+
+Evidence:
+Diffuse: Color of the reflected light is reflected in such a way that the light is reflected at many angles. The equation to calculate diffuse lighting is as follows: Kd * Id * lambertTerm.
+
+
+-K refers to the surface’s material property colors. d refers to what light model is being used.
+-I refers to the light properties. d refers to what light model is being used.
+-lambertTerm is the dot product between the surface’s normal vector (N) and a vector in the direction the light is coming from (Lm). This result is then clamped between zero and one.
+ diffuse only.png 
+
+*Picture of diffuse lighting using a sphere.
+
+
+Ambient: Color of the indirect light in an area. The equation to calculate Ambient lighting is as follows: (Ia * .01f) * (Ka) * hemisphere.
+
+
+-K refers to the surface’s material property colors. a refers to what light model is being used.
+-I refers to the light properties. a refers to what light model is being used.
+-hemisphere variable holds the interplate colors from upper and lower hemispheres.
+ ambient only.png 
+
+*Picture of ambient lighting using a sphere.
+
+
+Specular: Color of the reflected light reflected as a single ray off the object’s surface. The equation to calculate Specular lighting is as follows: Is * Ks * specularTerm.
+
+
+-K refers to the surface’s material property colors. s refers to what light model is being used.
+-I refers to the light properties. s refers to what light model is being used.
+-specularTerm is the dot product between the light’s reflected ray (Rm) and a vector from the surface to the viewer (V). This result is then clamped between zero and one.
+
+
+ specular only.png 
+
+*Picture of specular lighting using a sphere.
+
+
+Both Phong and Blinn-Phong use simple ambient reflection and the Lambertian for the diffuse reflection, but are different in how the specular reflection is calculated.
+
+
+Phong: calculates the direction of the reflection vector by using this formula: Rm = 2 * dot(N,Lm) * N - Lm, where Lm is the vector pointing towards the incoming light and N is the surface normal. Both Lm and N must be normalized.
+
+
+Blinn-Phong: uses the halfway vector. The halfway vector is calculated by using this formula: H = normalize(Lm + V), where Lm is the vector pointing towards the incoming light and V is the eye direction.
+
+
+The Phong model is used for this assessment project.
